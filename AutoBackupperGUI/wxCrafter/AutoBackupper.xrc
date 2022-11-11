@@ -1,0 +1,1152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns="http://www.wxwidgets.org/wxxrc">
+  <object class="wxDialog" name="NewTriggerDialogBase">
+    <title>Add a new trigger</title>
+    <centered>1</centered>
+    <style>wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP</style>
+    <hidden>1</hidden>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem" name="sizerControls">
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+        <option>1</option>
+        <object class="wxBoxSizer">
+          <orient>wxHORIZONTAL</orient>
+          <object class="sizeritem">
+            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+            <border>5</border>
+            <object class="wxRadioBox" name="radioBoxFrequency">
+              <label>Frequency</label>
+              <style/>
+              <dimension>1</dimension>
+              <selection>0</selection>
+              <content>
+                <item>One Time</item>
+                <item>Daily</item>
+                <item>Weekly</item>
+              </content>
+            </object>
+          </object>
+          <object class="sizeritem" name="sizerDateTimeRecurrence">
+            <flag/>
+            <border>5</border>
+            <object class="wxBoxSizer">
+              <orient>wxVERTICAL</orient>
+              <object class="sizeritem" name="sizerDateTime">
+                <flag>wxALL</flag>
+                <border>5</border>
+                <object class="wxStaticBoxSizer" name="sizerDateTime">
+                  <sizeritem>
+                    <object class="spacer"/>
+                  </sizeritem>
+                  <orient>wxHORIZONTAL</orient>
+                  <label>Start date and time</label>
+                  <object class="sizeritem">
+                    <flag>wxALL</flag>
+                    <border>5</border>
+                    <object class="wxDatePickerCtrl" name="datePickerStart">
+                      <style>wxDP_DROPDOWN</style>
+                    </object>
+                  </object>
+                  <object class="sizeritem">
+                    <flag>wxALL</flag>
+                    <border>5</border>
+                    <object class="wxTimePickerCtrl" name="timePickerStart">
+                      <style/>
+                    </object>
+                  </object>
+                </object>
+              </object>
+              <object class="sizeritem">
+                <flag>wxLEFT|wxRIGHT|wxTOP|wxEXPAND</flag>
+                <border>5</border>
+                <option>1</option>
+                <object class="wxPanel" name="panelRecurrenceDays">
+                  <style>wxTAB_TRAVERSAL|wxBORDER_THEME</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxHORIZONTAL</orient>
+                    <object class="sizeritem" name="sizerRecurrence">
+                      <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                      <border>5</border>
+                      <object class="wxBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem">
+                          <flag>wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
+                          <border>5</border>
+                          <option>1</option>
+                          <object class="wxStaticText" name="staticTextRecurrence">
+                            <label>Recur every</label>
+                            <style/>
+                            <hidden>1</hidden>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <flag>wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
+                          <border>5</border>
+                          <object class="wxSpinCtrl" name="spinCtrlRecurrence">
+                            <style/>
+                            <hidden>1</hidden>
+                            <value>1</value>
+                            <min>1</min>
+                            <max>999</max>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <flag>wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
+                          <border>5</border>
+                          <object class="wxStaticText" name="staticTextRecurrenceUnit">
+                            <label>weeks on:</label>
+                            <style>wxST_NO_AUTORESIZE</style>
+                            <hidden>1</hidden>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                    <object class="sizeritem" name="sizerDays">
+                      <flag>wxALL</flag>
+                      <border>5</border>
+                      <option>1</option>
+                      <object class="wxBoxSizer">
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <flag>wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN</flag>
+                          <border>5</border>
+                          <object class="wxCheckListBox" name="checkListBoxDays">
+                            <hidden>1</hidden>
+                            <style>wxLB_NEEDED_SB|wxLB_HSCROLL|wxLB_SINGLE</style>
+                            <content>
+                              <item checked="0">Monday</item>
+                              <item checked="0">Tuesday</item>
+                              <item checked="0">Wednesday</item>
+                              <item checked="0">Thursday</item>
+                              <item checked="0">Friday</item>
+                              <item checked="0">Saturday</item>
+                              <item checked="0">Sunday</item>
+                            </content>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+              </object>
+            </object>
+          </object>
+        </object>
+      </object>
+      <object class="sizeritem" name="sizerButtons">
+        <flag>wxALL|wxEXPAND</flag>
+        <border>5</border>
+        <object class="wxBoxSizer">
+          <orient>wxHORIZONTAL</orient>
+          <object class="spacer" name="spacer">
+            <flag>wxALL|wxEXPAND</flag>
+            <border>5</border>
+            <option>1</option>
+          </object>
+          <object class="sizeritem">
+            <flag>wxALL</flag>
+            <border>5</border>
+            <object class="wxButton" name="buttonAdd">
+              <label>Add</label>
+              <style/>
+              <bitmapposition>wxLEFT</bitmapposition>
+              <default>0</default>
+            </object>
+          </object>
+          <object class="sizeritem">
+            <flag>wxALL</flag>
+            <border>5</border>
+            <object class="wxButton" name="buttonCancel">
+              <label>Cancel</label>
+              <style/>
+              <bitmapposition>wxLEFT</bitmapposition>
+              <default>0</default>
+            </object>
+          </object>
+        </object>
+      </object>
+    </object>
+  </object>
+  <object class="wxFrame" name="SettingsFrameBase">
+    <title>Settings</title>
+    <centered>1</centered>
+    <style>wxCAPTION|wxMINIMIZE_BOX|wxCLOSE_BOX</style>
+    <hidden>1</hidden>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <minsize>480,-1</minsize>
+      <object class="sizeritem" name="sizerNotebook">
+        <flag>wxEXPAND</flag>
+        <border>5</border>
+        <option>1</option>
+        <object class="wxBoxSizer">
+          <orient>wxVERTICAL</orient>
+          <object class="sizeritem">
+            <flag>wxALL|wxEXPAND</flag>
+            <border>5</border>
+            <option>1</option>
+            <object class="wxNotebook" name="notebookSettings">
+              <style>wxBK_DEFAULT</style>
+              <object class="notebookpage">
+                <label>Archive</label>
+                <selected>1</selected>
+                <object class="wxPanel" name="panelArchive">
+                  <style>wxTAB_TRAVERSAL</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <flag>wxALL|wxEXPAND</flag>
+                      <border>5</border>
+                      <object class="wxNotebook" name="notebookArchiveSettings">
+                        <style>wxNB_FIXEDWIDTH|wxBK_DEFAULT</style>
+                        <object class="notebookpage">
+                          <label>General</label>
+                          <selected>1</selected>
+                          <object class="wxPanel" name="panelGeneral">
+                            <style>wxTAB_TRAVERSAL</style>
+                            <object class="wxBoxSizer">
+                              <orient>wxVERTICAL</orient>
+                              <object class="sizeritem" name="sizerDestinationPath">
+                                <flag>wxTOP|wxEXPAND</flag>
+                                <border>5</border>
+                                <object class="wxBoxSizer">
+                                  <orient>wxVERTICAL</orient>
+                                  <object class="sizeritem">
+                                    <flag>wxLEFT|wxTOP</flag>
+                                    <border>5</border>
+                                    <object class="wxStaticText" name="staticTextDestinationPath">
+                                      <label>Destination Path</label>
+                                      <style/>
+                                    </object>
+                                  </object>
+                                  <object class="sizeritem">
+                                    <flag>wxALL|wxEXPAND</flag>
+                                    <border>5</border>
+                                    <object class="wxDirPickerCtrl" name="dirPickerDestinationPath">
+                                      <style>wxDIRP_DEFAULT_STYLE</style>
+                                      <message>Select a path for your backup archive</message>
+                                      <value/>
+                                    </object>
+                                  </object>
+                                </object>
+                              </object>
+                              <object class="sizeritem" name="sizerArchiveName">
+                                <flag>wxTOP|wxEXPAND</flag>
+                                <border>5</border>
+                                <object class="wxBoxSizer">
+                                  <orient>wxVERTICAL</orient>
+                                  <object class="sizeritem">
+                                    <flag>wxLEFT</flag>
+                                    <border>5</border>
+                                    <object class="wxStaticText" name="staticTextArchiveName">
+                                      <label>Archive Name</label>
+                                      <style/>
+                                    </object>
+                                  </object>
+                                  <object class="sizeritem" name="sizerName">
+                                    <flag>wxALL|wxEXPAND</flag>
+                                    <border>5</border>
+                                    <option>1</option>
+                                    <object class="wxBoxSizer">
+                                      <orient>wxHORIZONTAL</orient>
+                                      <object class="sizeritem">
+                                        <flag>wxRIGHT|wxTOP|wxBOTTOM|wxEXPAND</flag>
+                                        <border>5</border>
+                                        <option>1</option>
+                                        <object class="wxTextCtrl" name="textCtrlArchiveName">
+                                          <style/>
+                                        </object>
+                                      </object>
+                                      <object class="sizeritem">
+                                        <flag>wxBOTTOM|wxALIGN_BOTTOM</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="staticTextUnderscore1">
+                                          <label>_</label>
+                                          <style/>
+                                        </object>
+                                      </object>
+                                      <object class="sizeritem">
+                                        <flag>wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxTextCtrl" name="textCtrlDate">
+                                          <style>wxTE_READONLY|wxTE_NO_VSCROLL|wxTE_CENTRE</style>
+                                          <value>*Current Date*</value>
+                                        </object>
+                                      </object>
+                                      <object class="sizeritem">
+                                        <flag>wxBOTTOM|wxALIGN_BOTTOM</flag>
+                                        <border>5</border>
+                                        <object class="wxStaticText" name="staticTextUnderscore2">
+                                          <label>_</label>
+                                          <style/>
+                                        </object>
+                                      </object>
+                                      <object class="sizeritem">
+                                        <flag>wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxTextCtrl" name="textCtrlTime">
+                                          <style>wxTE_READONLY|wxTE_NO_VSCROLL|wxTE_CENTRE</style>
+                                          <value>*Current Time*</value>
+                                        </object>
+                                      </object>
+                                    </object>
+                                  </object>
+                                </object>
+                              </object>
+                              <object class="sizeritem" name="sizerCompressionUpdate">
+                                <flag>wxEXPAND</flag>
+                                <border>5</border>
+                                <object class="wxBoxSizer">
+                                  <orient>wxHORIZONTAL</orient>
+                                  <object class="sizeritem" name="sizerCompressionLevel">
+                                    <flag>wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxStaticBoxSizer" name="sizerCompressionLevel">
+                                      <sizeritem>
+                                        <object class="spacer"/>
+                                      </sizeritem>
+                                      <orient>wxVERTICAL</orient>
+                                      <label>Compression Level</label>
+                                      <object class="sizeritem">
+                                        <flag>wxALL|wxEXPAND</flag>
+                                        <border>5</border>
+                                        <option>1</option>
+                                        <object class="wxChoice" name="choiceCompressionLevel">
+                                          <style/>
+                                          <content>
+                                            <item>Copy</item>
+                                            <item>Fastest</item>
+                                            <item>Fast</item>
+                                            <item>Normal</item>
+                                            <item>High</item>
+                                            <item>Max</item>
+                                          </content>
+                                          <selection>3</selection>
+                                        </object>
+                                      </object>
+                                    </object>
+                                  </object>
+                                  <object class="spacer" name="spacer1">
+                                    <flag>wxALL|wxEXPAND</flag>
+                                    <border>5</border>
+                                    <option>1</option>
+                                  </object>
+                                  <object class="sizeritem" name="sizerUpdateMode">
+                                    <flag>wxALL</flag>
+                                    <border>5</border>
+                                    <option>1</option>
+                                    <object class="wxStaticBoxSizer" name="sizerUpdateMode">
+                                      <sizeritem>
+                                        <object class="spacer"/>
+                                      </sizeritem>
+                                      <orient>wxVERTICAL</orient>
+                                      <label>Update Mode</label>
+                                      <object class="sizeritem">
+                                        <flag>wxALL|wxEXPAND</flag>
+                                        <border>5</border>
+                                        <minsize>100,-1</minsize>
+                                        <option>1</option>
+                                        <object class="wxChoice" name="choiceUpdateMode">
+                                          <style/>
+                                          <content>
+                                            <item>None</item>
+                                            <item>Append</item>
+                                            <item>Overwrite</item>
+                                          </content>
+                                          <selection>2</selection>
+                                        </object>
+                                      </object>
+                                    </object>
+                                  </object>
+                                </object>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                        <object class="notebookpage">
+                          <label>Advanced</label>
+                          <selected>0</selected>
+                          <object class="wxPanel" name="panelAdvanced">
+                            <style>wxTAB_TRAVERSAL</style>
+                            <object class="wxBoxSizer">
+                              <orient>wxVERTICAL</orient>
+                              <object class="sizeritem" name="sizerFormatCompressionDictionary">
+                                <flag>wxTOP|wxEXPAND</flag>
+                                <border>5</border>
+                                <object class="wxBoxSizer">
+                                  <orient>wxHORIZONTAL</orient>
+                                  <object class="sizeritem">
+                                    <flag>wxALL|wxEXPAND</flag>
+                                    <border>5</border>
+                                    <option>1</option>
+                                    <object class="wxRadioBox" name="radioBoxFormat">
+                                      <label>Format</label>
+                                      <style>wxRA_SPECIFY_ROWS</style>
+                                      <dimension>1</dimension>
+                                      <selection>0</selection>
+                                      <content>
+                                        <item>*.7z</item>
+                                        <item>*.zip</item>
+                                      </content>
+                                    </object>
+                                  </object>
+                                  <object class="sizeritem" name="sizerCompressionMethod">
+                                    <flag>wxALL</flag>
+                                    <border>5</border>
+                                    <option>1</option>
+                                    <object class="wxStaticBoxSizer" name="sizerCompressionMethod">
+                                      <sizeritem>
+                                        <object class="spacer"/>
+                                      </sizeritem>
+                                      <orient>wxHORIZONTAL</orient>
+                                      <label>Compression Method</label>
+                                      <object class="sizeritem">
+                                        <flag>wxALL|wxEXPAND</flag>
+                                        <border>5</border>
+                                        <minsize>100,-1</minsize>
+                                        <option>1</option>
+                                        <object class="wxChoice" name="choiceCompressionMethod">
+                                          <style/>
+                                          <content>
+                                            <item>BZip2</item>
+                                            <item>LZMA</item>
+                                            <item>LZMA2</item>
+                                            <item>PPMd</item>
+                                          </content>
+                                          <selection>2</selection>
+                                        </object>
+                                      </object>
+                                    </object>
+                                  </object>
+                                  <object class="sizeritem" name="sizerDictionarySize">
+                                    <flag>wxALL</flag>
+                                    <border>5</border>
+                                    <option>1</option>
+                                    <object class="wxStaticBoxSizer" name="sizerDictionarySize">
+                                      <sizeritem>
+                                        <object class="spacer"/>
+                                      </sizeritem>
+                                      <orient>wxVERTICAL</orient>
+                                      <label>Dictionary Size</label>
+                                      <object class="sizeritem">
+                                        <flag>wxALL|wxEXPAND</flag>
+                                        <border>5</border>
+                                        <option>1</option>
+                                        <object class="wxChoice" name="choiceDictionarySize">
+                                          <style/>
+                                          <content>
+                                            <item>64 KB</item>
+                                            <item>256 KB</item>
+                                            <item>1 MB</item>
+                                            <item>2 MB</item>
+                                            <item>4 MB</item>
+                                            <item>8 MB</item>
+                                            <item>16 MB</item>
+                                            <item>32 MB</item>
+                                            <item>64 MB</item>
+                                            <item>128 MB</item>
+                                            <item>256 MB</item>
+                                            <item>512 MB</item>
+                                            <item>1024 MB</item>
+                                          </content>
+                                          <selection>6</selection>
+                                        </object>
+                                      </object>
+                                    </object>
+                                  </object>
+                                </object>
+                              </object>
+                              <object class="sizeritem" name="sizerThreadVolumeSolid">
+                                <flag>wxEXPAND</flag>
+                                <border>5</border>
+                                <object class="wxBoxSizer">
+                                  <orient>wxHORIZONTAL</orient>
+                                  <object class="sizeritem" name="sizerThreadCount">
+                                    <flag>wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxStaticBoxSizer" name="sizerThreadCount">
+                                      <sizeritem>
+                                        <object class="spacer"/>
+                                      </sizeritem>
+                                      <orient>wxVERTICAL</orient>
+                                      <label>Thread Count</label>
+                                      <object class="sizeritem">
+                                        <flag>wxALL|wxEXPAND</flag>
+                                        <border>5</border>
+                                        <option>1</option>
+                                        <object class="wxChoice" name="choiceThreadCount">
+                                          <style/>
+                                          <content/>
+                                          <selection/>
+                                        </object>
+                                      </object>
+                                    </object>
+                                  </object>
+                                  <object class="sizeritem" name="sizerVolumeSize">
+                                    <flag>wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxStaticBoxSizer" name="sizerVolumeSize">
+                                      <sizeritem>
+                                        <object class="spacer"/>
+                                      </sizeritem>
+                                      <orient>wxHORIZONTAL</orient>
+                                      <label>Volume Size</label>
+                                      <object class="sizeritem">
+                                        <flag>wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxTextCtrl" name="textCtrlVolumeSize">
+                                          <style>wxTE_RIGHT</style>
+                                        </object>
+                                      </object>
+                                      <object class="sizeritem">
+                                        <flag>wxALL</flag>
+                                        <border>5</border>
+                                        <object class="wxChoice" name="choiceVolumeSizeUnit">
+                                          <style/>
+                                          <content>
+                                            <item>B</item>
+                                            <item>KB</item>
+                                            <item>MB</item>
+                                            <item>GB</item>
+                                          </content>
+                                          <selection>2</selection>
+                                        </object>
+                                      </object>
+                                    </object>
+                                  </object>
+                                  <object class="sizeritem" name="sizerSolidMode">
+                                    <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                    <border>5</border>
+                                    <option>1</option>
+                                    <object class="wxBoxSizer">
+                                      <orient>wxVERTICAL</orient>
+                                      <object class="sizeritem">
+                                        <flag>wxALL|wxEXPAND</flag>
+                                        <border>5</border>
+                                        <option>1</option>
+                                        <object class="wxCheckBox" name="checkBoxSolidMode">
+                                          <style/>
+                                          <label>Solid Mode</label>
+                                          <checked>0</checked>
+                                        </object>
+                                      </object>
+                                    </object>
+                                  </object>
+                                </object>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+              </object>
+              <object class="notebookpage">
+                <label>Schedule</label>
+                <selected>0</selected>
+                <object class="wxPanel" name="panelSchedule">
+                  <style>wxTAB_TRAVERSAL</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxHORIZONTAL</orient>
+                    <object class="sizeritem" name="sizerTriggerList">
+                      <flag>wxEXPAND</flag>
+                      <border>5</border>
+                      <option>1</option>
+                      <object class="wxBoxSizer">
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <flag>wxLEFT|wxRIGHT|wxTOP</flag>
+                          <border>5</border>
+                          <object class="wxStaticText" name="staticTextTriggerList">
+                            <label>Active Triggers</label>
+                            <style/>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <flag>wxALL|wxEXPAND</flag>
+                          <border>5</border>
+                          <option>1</option>
+                          <object class="wxListCtrl" name="triggerList">
+                            <style>wxLC_SINGLE_SEL|wxLC_REPORT</style>
+                            <object class="listcol">
+                              <text>Type</text>
+                              <width>-1</width>
+                            </object>
+                            <object class="listcol">
+                              <text>Details</text>
+                              <width>-1</width>
+                            </object>
+                          </object>
+                        </object>
+                        <object class="sizeritem" name="sizerTriggerListButtons">
+                          <flag>wxEXPAND</flag>
+                          <border>5</border>
+                          <object class="wxBoxSizer">
+                            <orient>wxHORIZONTAL</orient>
+                            <object class="sizeritem">
+                              <flag>wxALL</flag>
+                              <border>5</border>
+                              <object class="wxButton" name="buttonNew">
+                                <label>New</label>
+                                <style/>
+                                <bitmapposition>wxLEFT</bitmapposition>
+                                <default>0</default>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <flag>wxALL</flag>
+                              <border>5</border>
+                              <object class="wxButton" name="buttonRemove">
+                                <label>Remove</label>
+                                <style/>
+                                <enabled>0</enabled>
+                                <bitmapposition>wxLEFT</bitmapposition>
+                                <default>0</default>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+              </object>
+            </object>
+          </object>
+        </object>
+      </object>
+      <object class="sizeritem" name="sizerButtons">
+        <flag>wxEXPAND</flag>
+        <border>5</border>
+        <object class="wxBoxSizer">
+          <orient>wxHORIZONTAL</orient>
+          <object class="spacer" name="spacer">
+            <flag>wxALL</flag>
+            <border>5</border>
+            <option>1</option>
+          </object>
+          <object class="sizeritem">
+            <flag>wxALL</flag>
+            <border>5</border>
+            <object class="wxButton" name="buttonSave">
+              <label>Save</label>
+              <style/>
+              <bitmapposition>wxLEFT</bitmapposition>
+              <default>1</default>
+            </object>
+          </object>
+          <object class="sizeritem">
+            <flag>wxALL</flag>
+            <border>5</border>
+            <object class="wxButton" name="buttonCancel">
+              <label>Cancel</label>
+              <style/>
+              <bitmapposition>wxRIGHT</bitmapposition>
+              <default>0</default>
+            </object>
+          </object>
+        </object>
+      </object>
+    </object>
+  </object>
+  <object class="wxDialog" name="ManualBackupDialogBase">
+    <title>Manual Backup</title>
+    <centered>1</centered>
+    <style>wxDEFAULT_DIALOG_STYLE</style>
+    <hidden>1</hidden>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem" name="sizerNotebook">
+        <flag>wxEXPAND</flag>
+        <border>5</border>
+        <object class="wxBoxSizer">
+          <orient>wxVERTICAL</orient>
+          <object class="sizeritem">
+            <flag>wxALL|wxEXPAND</flag>
+            <border>5</border>
+            <object class="wxNotebook" name="notebookArchiveSettings">
+              <style>wxNB_FIXEDWIDTH|wxBK_DEFAULT</style>
+              <object class="notebookpage">
+                <label>General</label>
+                <selected>1</selected>
+                <object class="wxPanel" name="panelGeneralSettings">
+                  <style>wxTAB_TRAVERSAL</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem" name="sizerDestinationPath">
+                      <flag>wxTOP|wxEXPAND</flag>
+                      <border>5</border>
+                      <object class="wxBoxSizer">
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <flag>wxLEFT|wxTOP</flag>
+                          <border>5</border>
+                          <object class="wxStaticText" name="staticTextDestinationPath">
+                            <label>Destination Path</label>
+                            <style/>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <flag>wxALL|wxEXPAND</flag>
+                          <border>5</border>
+                          <object class="wxDirPickerCtrl" name="dirPickerDestinationPath">
+                            <style>wxDIRP_DEFAULT_STYLE</style>
+                            <message>Select a path for your backup archive</message>
+                            <value/>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                    <object class="sizeritem" name="sizerArchiveName">
+                      <flag>wxTOP|wxEXPAND</flag>
+                      <border>5</border>
+                      <object class="wxBoxSizer">
+                        <orient>wxVERTICAL</orient>
+                        <object class="sizeritem">
+                          <flag>wxLEFT</flag>
+                          <border>5</border>
+                          <object class="wxStaticText" name="staticTextArchiveName">
+                            <label>Archive Name</label>
+                            <style/>
+                          </object>
+                        </object>
+                        <object class="sizeritem" name="sizerName">
+                          <flag>wxALL|wxEXPAND</flag>
+                          <border>5</border>
+                          <option>1</option>
+                          <object class="wxBoxSizer">
+                            <orient>wxHORIZONTAL</orient>
+                            <object class="sizeritem">
+                              <flag>wxRIGHT|wxTOP|wxBOTTOM|wxEXPAND</flag>
+                              <border>5</border>
+                              <option>1</option>
+                              <object class="wxTextCtrl" name="textCtrlArchiveName">
+                                <style/>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <flag>wxBOTTOM|wxALIGN_BOTTOM</flag>
+                              <border>5</border>
+                              <object class="wxStaticText" name="staticTextUnderscore1">
+                                <label>_</label>
+                                <style/>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <flag>wxALL</flag>
+                              <border>5</border>
+                              <object class="wxTextCtrl" name="textCtrlDate">
+                                <style>wxTE_READONLY|wxTE_NO_VSCROLL|wxTE_CENTRE</style>
+                                <value>*Current Date*</value>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <flag>wxBOTTOM|wxALIGN_BOTTOM</flag>
+                              <border>5</border>
+                              <object class="wxStaticText" name="staticTextUnderscore2">
+                                <label>_</label>
+                                <style/>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <flag>wxALL</flag>
+                              <border>5</border>
+                              <object class="wxTextCtrl" name="textCtrlTime">
+                                <style>wxTE_READONLY|wxTE_NO_VSCROLL|wxTE_CENTRE</style>
+                                <value>*Current Time*</value>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                    <object class="sizeritem" name="sizerCompressionUpdate">
+                      <flag>wxEXPAND</flag>
+                      <border>5</border>
+                      <object class="wxBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem" name="sizerCompressionLevel">
+                          <flag>wxALL</flag>
+                          <border>5</border>
+                          <object class="wxStaticBoxSizer" name="sizerCompressionLevel">
+                            <sizeritem>
+                              <object class="spacer"/>
+                            </sizeritem>
+                            <orient>wxVERTICAL</orient>
+                            <label>Compression Level</label>
+                            <object class="sizeritem">
+                              <flag>wxALL|wxEXPAND</flag>
+                              <border>5</border>
+                              <option>1</option>
+                              <object class="wxChoice" name="choiceCompressionLevel">
+                                <style/>
+                                <content>
+                                  <item>Copy</item>
+                                  <item>Fastest</item>
+                                  <item>Fast</item>
+                                  <item>Normal</item>
+                                  <item>High</item>
+                                  <item>Max</item>
+                                </content>
+                                <selection>3</selection>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                        <object class="spacer" name="spacer1">
+                          <flag>wxALL|wxEXPAND</flag>
+                          <border>5</border>
+                          <option>1</option>
+                        </object>
+                        <object class="sizeritem" name="sizerUpdateMode">
+                          <flag>wxALL</flag>
+                          <border>5</border>
+                          <option>1</option>
+                          <object class="wxStaticBoxSizer" name="sizerUpdateMode">
+                            <sizeritem>
+                              <object class="spacer"/>
+                            </sizeritem>
+                            <orient>wxVERTICAL</orient>
+                            <label>Update Mode</label>
+                            <object class="sizeritem">
+                              <flag>wxALL|wxEXPAND</flag>
+                              <border>5</border>
+                              <minsize>100,-1</minsize>
+                              <option>1</option>
+                              <object class="wxChoice" name="choiceUpdateMode">
+                                <style/>
+                                <content>
+                                  <item>None</item>
+                                  <item>Append</item>
+                                  <item>Overwrite</item>
+                                </content>
+                                <selection>2</selection>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+              </object>
+              <object class="notebookpage">
+                <label>Advanced</label>
+                <selected>0</selected>
+                <object class="wxPanel" name="panelAdvancedSettings">
+                  <style>wxTAB_TRAVERSAL</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem" name="sizerFormatCompressionDictionary">
+                      <flag>wxTOP|wxEXPAND</flag>
+                      <border>5</border>
+                      <object class="wxBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem">
+                          <flag>wxALL|wxEXPAND</flag>
+                          <border>5</border>
+                          <option>1</option>
+                          <object class="wxRadioBox" name="radioBoxFormat">
+                            <label>Format</label>
+                            <style>wxRA_SPECIFY_ROWS</style>
+                            <dimension>1</dimension>
+                            <selection>0</selection>
+                            <content>
+                              <item>*.7z</item>
+                              <item>*.zip</item>
+                            </content>
+                          </object>
+                        </object>
+                        <object class="sizeritem" name="sizerCompressionMethod">
+                          <flag>wxALL</flag>
+                          <border>5</border>
+                          <option>1</option>
+                          <object class="wxStaticBoxSizer" name="sizerCompressionMethod">
+                            <sizeritem>
+                              <object class="spacer"/>
+                            </sizeritem>
+                            <orient>wxHORIZONTAL</orient>
+                            <label>Compression Method</label>
+                            <object class="sizeritem">
+                              <flag>wxALL|wxEXPAND</flag>
+                              <border>5</border>
+                              <minsize>100,-1</minsize>
+                              <option>1</option>
+                              <object class="wxChoice" name="choiceCompressionMethod">
+                                <style/>
+                                <content>
+                                  <item>BZip2</item>
+                                  <item>LZMA</item>
+                                  <item>LZMA2</item>
+                                  <item>PPMd</item>
+                                </content>
+                                <selection>2</selection>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                        <object class="sizeritem" name="sizerDictionarySize">
+                          <flag>wxALL</flag>
+                          <border>5</border>
+                          <option>1</option>
+                          <object class="wxStaticBoxSizer" name="sizerDictionarySize">
+                            <sizeritem>
+                              <object class="spacer"/>
+                            </sizeritem>
+                            <orient>wxVERTICAL</orient>
+                            <label>Dictionary Size</label>
+                            <object class="sizeritem">
+                              <flag>wxALL|wxEXPAND</flag>
+                              <border>5</border>
+                              <option>1</option>
+                              <object class="wxChoice" name="choiceDictionarySize">
+                                <style/>
+                                <content>
+                                  <item>64 KB</item>
+                                  <item>256 KB</item>
+                                  <item>1 MB</item>
+                                  <item>2 MB</item>
+                                  <item>4 MB</item>
+                                  <item>8 MB</item>
+                                  <item>16 MB</item>
+                                  <item>32 MB</item>
+                                  <item>64 MB</item>
+                                  <item>128 MB</item>
+                                  <item>256 MB</item>
+                                  <item>512 MB</item>
+                                  <item>1024 MB</item>
+                                </content>
+                                <selection>6</selection>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                    <object class="sizeritem" name="sizerThreadVolumeSolid">
+                      <flag>wxEXPAND</flag>
+                      <border>5</border>
+                      <object class="wxBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem" name="sizerThreadCount">
+                          <flag>wxALL</flag>
+                          <border>5</border>
+                          <object class="wxStaticBoxSizer" name="sizerThreadCount">
+                            <sizeritem>
+                              <object class="spacer"/>
+                            </sizeritem>
+                            <orient>wxVERTICAL</orient>
+                            <label>Thread Count</label>
+                            <object class="sizeritem">
+                              <flag>wxALL|wxEXPAND</flag>
+                              <border>5</border>
+                              <option>1</option>
+                              <object class="wxChoice" name="choiceThreadCount">
+                                <style/>
+                                <content/>
+                                <selection/>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                        <object class="sizeritem" name="sizerVolumeSize">
+                          <flag>wxALL</flag>
+                          <border>5</border>
+                          <object class="wxStaticBoxSizer" name="sizerVolumeSize">
+                            <sizeritem>
+                              <object class="spacer"/>
+                            </sizeritem>
+                            <orient>wxHORIZONTAL</orient>
+                            <label>Volume Size</label>
+                            <object class="sizeritem">
+                              <flag>wxALL</flag>
+                              <border>5</border>
+                              <object class="wxTextCtrl" name="textCtrlVolumeSize">
+                                <style>wxTE_RIGHT</style>
+                              </object>
+                            </object>
+                            <object class="sizeritem">
+                              <flag>wxALL</flag>
+                              <border>5</border>
+                              <object class="wxChoice" name="choiceVolumeSizeUnit">
+                                <style/>
+                                <content>
+                                  <item>B</item>
+                                  <item>KB</item>
+                                  <item>MB</item>
+                                  <item>GB</item>
+                                </content>
+                                <selection>2</selection>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                        <object class="sizeritem" name="sizerSolidMode">
+                          <flag>wxALIGN_CENTER_VERTICAL</flag>
+                          <border>5</border>
+                          <option>1</option>
+                          <object class="wxBoxSizer">
+                            <orient>wxVERTICAL</orient>
+                            <object class="sizeritem">
+                              <flag>wxALL|wxEXPAND</flag>
+                              <border>5</border>
+                              <option>1</option>
+                              <object class="wxCheckBox" name="checkBoxSolidMode">
+                                <style/>
+                                <label>Solid Mode</label>
+                                <checked>0</checked>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+              </object>
+            </object>
+          </object>
+        </object>
+      </object>
+      <object class="sizeritem" name="sizerButtons">
+        <flag>wxEXPAND</flag>
+        <border>5</border>
+        <object class="wxBoxSizer">
+          <orient>wxHORIZONTAL</orient>
+          <object class="spacer" name="spacer">
+            <flag>wxALL|wxEXPAND</flag>
+            <border>5</border>
+            <option>1</option>
+          </object>
+          <object class="sizeritem">
+            <flag>wxALL</flag>
+            <border>5</border>
+            <object class="wxButton" name="buttonGo">
+              <label>Go</label>
+              <style/>
+              <bitmapposition>wxLEFT</bitmapposition>
+              <default>0</default>
+            </object>
+          </object>
+          <object class="sizeritem">
+            <flag>wxALL</flag>
+            <border>5</border>
+            <object class="wxButton" name="buttonCancel">
+              <label>Cancel</label>
+              <style/>
+              <bitmapposition>wxLEFT</bitmapposition>
+              <default>0</default>
+            </object>
+          </object>
+        </object>
+      </object>
+    </object>
+  </object>
+  <object class="wxFrame" name="MainFrameBase">
+    <title>AutoBackupper</title>
+    <centered>1</centered>
+    <style>wxCAPTION|wxMINIMIZE_BOX|wxCLOSE_BOX</style>
+    <size>640,360</size>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <minsize>640,360</minsize>
+      <object class="sizeritem" name="sizerMainList">
+        <flag>wxEXPAND</flag>
+        <border>5</border>
+        <option>1</option>
+        <object class="wxBoxSizer">
+          <orient>wxVERTICAL</orient>
+          <object class="sizeritem">
+            <flag>wxALL|wxEXPAND</flag>
+            <border>5</border>
+            <option>1</option>
+            <object class="wxListCtrl" name="mainList">
+              <style>wxLC_REPORT</style>
+              <object class="listcol">
+                <text>Name</text>
+                <width>-1</width>
+              </object>
+              <object class="listcol">
+                <text>Size</text>
+                <width>-1</width>
+              </object>
+              <object class="listcol">
+                <text>Path</text>
+                <width>-2</width>
+              </object>
+            </object>
+          </object>
+        </object>
+      </object>
+      <object class="sizeritem" name="sizerButtons">
+        <flag>wxEXPAND</flag>
+        <border>5</border>
+        <object class="wxGridSizer">
+          <cols>6</cols>
+          <rows>1</rows>
+          <vgap>0</vgap>
+          <hgap>0</hgap>
+          <object class="sizeritem">
+            <flag>wxALL|wxEXPAND</flag>
+            <border>5</border>
+            <object class="wxButton" name="buttonArchive">
+              <label>Archive</label>
+              <style/>
+              <bitmapposition>wxLEFT</bitmapposition>
+              <default>0</default>
+            </object>
+          </object>
+          <object class="sizeritem">
+            <flag>wxALL|wxEXPAND</flag>
+            <border>5</border>
+            <object class="wxButton" name="buttonAddDirectory">
+              <label>Add Folder</label>
+              <style/>
+              <bitmapposition>wxLEFT</bitmapposition>
+              <default>0</default>
+            </object>
+          </object>
+          <object class="sizeritem">
+            <flag>wxALL|wxEXPAND</flag>
+            <border>5</border>
+            <object class="wxButton" name="buttonAddFile">
+              <label>Add File</label>
+              <style/>
+              <bitmapposition>wxLEFT</bitmapposition>
+              <default>0</default>
+            </object>
+          </object>
+          <object class="sizeritem">
+            <flag>wxALL|wxEXPAND</flag>
+            <border>5</border>
+            <object class="wxButton" name="buttonRemove">
+              <label>Remove</label>
+              <style/>
+              <enabled>0</enabled>
+              <bitmapposition>wxLEFT</bitmapposition>
+              <default>0</default>
+            </object>
+          </object>
+          <object class="spacer" name="spacer">
+            <flag>wxALL</flag>
+            <border>5</border>
+            <option>1</option>
+          </object>
+          <object class="sizeritem">
+            <flag>wxALL|wxEXPAND</flag>
+            <border>5</border>
+            <object class="wxButton" name="buttonSettings">
+              <label>Settings</label>
+              <style/>
+              <bitmapposition>wxRIGHT</bitmapposition>
+              <default>0</default>
+            </object>
+          </object>
+        </object>
+      </object>
+    </object>
+  </object>
+</resource>
