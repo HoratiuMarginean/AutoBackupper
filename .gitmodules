@@ -1,0 +1,6 @@
+[submodule "dependencies/bit7z"]
+	path = dependencies/bit7z
+	url = https://github.com/rikyoz/bit7z
+[submodule "dependencies/wxWidgets"]
+	path = dependencies/wxWidgets
+	url = https://github.com/wxWidgets/wxWidgets
