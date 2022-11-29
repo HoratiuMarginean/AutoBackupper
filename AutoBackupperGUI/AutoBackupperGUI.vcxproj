@@ -81,19 +81,19 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(SolutionDir)dependencies\wxWidgets\wxwidgets.props" />
+    <Import Project="..\dependencies\wxWidgets\wxwidgets.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(SolutionDir)dependencies\wxWidgets\wxwidgets.props" />
+    <Import Project="..\dependencies\wxWidgets\wxwidgets.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(SolutionDir)dependencies\wxWidgets\wxwidgets.props" />
+    <Import Project="..\dependencies\wxWidgets\wxwidgets.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="$(SolutionDir)dependencies\wxWidgets\wxwidgets.props" />
+    <Import Project="..\dependencies\wxWidgets\wxwidgets.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -156,8 +156,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\_Programming\Tools\GitHub\bit7z\lib\x64\Debug;D:\_Programming\Tools\GitHub\wxWidgets\lib\vc_x64_lib;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.19041.0\um\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>bit7z.lib;OleAut32.lib;User32.lib;taskschd.lib;comsupp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\bit7z\lib\x64;$(SolutionDir)dependencies\wxWidgets\out\build\x64-Debug\lib\vc_x64_lib;$(WindowsSDK_LibraryPath)\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bit7z.lib;user32.lib;oleaut32.lib;taskschd.lib;comsupp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -176,8 +176,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\_Programming\Tools\GitHub\bit7z\lib\x64\Release;D:\_Programming\Tools\GitHub\wxWidgets\lib\vc_x64_lib;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.19041.0\um\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>bit7z.lib;OleAut32.lib;User32.lib;taskschd.lib;comsupp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\bit7z\lib\x64;$(SolutionDir)dependencies\wxWidgets\out\build\x64-Release\lib\vc_x64_lib;$(WindowsSDK_LibraryPath)\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bit7z.lib;user32.lib;oleaut32.lib;taskschd.lib;comsupp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
