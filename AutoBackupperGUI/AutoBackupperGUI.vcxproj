@@ -112,16 +112,17 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;BIT7Z_USE_NATIVE_STRING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\_Programming\Projects\C++\Personal Projects\AutoBackupper\AutoBackupperGUI\include;D:\_Programming\Projects\C++\Personal Projects\AutoBackupper\AutoBackupperGUI\wxCrafter;D:\_Programming\Projects\C++\Personal Projects\AutoBackupper\common\include;D:\_Programming\Tools\GitHub\bit7z\include;D:\_Programming\Tools\GitHub\wxWidgets\include\msvc;D:\_Programming\Tools\GitHub\wxWidgets\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AutoBackupperGUI\include;$(SolutionDir)AutoBackupperGUI\wxCrafter;$(SolutionDir)common\include;$(SolutionDir)dependencies\bit7z\include;$(SolutionDir)dependencies\wxWidgets\include;$(SolutionDir)dependencies\wxWidgets\include\msvc</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\_Programming\Tools\GitHub\bit7z\lib\x64\Debug;D:\_Programming\Tools\GitHub\wxWidgets\lib\vc_x64_lib;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.19041.0\um\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>bit7z.lib;OleAut32.lib;User32.lib;taskschd.lib;comsupp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\bit7z\lib\x86;$(SolutionDir)dependencies\wxWidgets\lib\vc_lib;$(WindowsSDK_LibraryPath)\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bit7z_d.lib;OleAut32.lib;User32.lib;taskschd.lib;comsupp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -130,17 +131,18 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;BIT7Z_USE_NATIVE_STRING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\_Programming\Projects\C++\Personal Projects\AutoBackupper\AutoBackupperGUI\include;D:\_Programming\Projects\C++\Personal Projects\AutoBackupper\AutoBackupperGUI\wxCrafter;D:\_Programming\Projects\C++\Personal Projects\AutoBackupper\common\include;D:\_Programming\Tools\GitHub\bit7z\include;D:\_Programming\Tools\GitHub\wxWidgets\include\msvc;D:\_Programming\Tools\GitHub\wxWidgets\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AutoBackupperGUI\include;$(SolutionDir)AutoBackupperGUI\wxCrafter;$(SolutionDir)common\include;$(SolutionDir)dependencies\bit7z\include;$(SolutionDir)dependencies\wxWidgets\include;$(SolutionDir)dependencies\wxWidgets\include\msvc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\_Programming\Tools\GitHub\bit7z\lib\x64\Release;D:\_Programming\Tools\GitHub\wxWidgets\lib\vc_x64_lib;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.19041.0\um\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\bit7z\lib\x86;$(SolutionDir)dependencies\wxWidgets\lib\vc_lib;$(WindowsSDK_LibraryPath)\x86</AdditionalLibraryDirectories>
       <AdditionalDependencies>bit7z.lib;OleAut32.lib;User32.lib;taskschd.lib;comsupp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -148,16 +150,17 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;BIT7Z_USE_NATIVE_STRING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\_Programming\Projects\C++\Personal Projects\AutoBackupper\AutoBackupperGUI\include;D:\_Programming\Projects\C++\Personal Projects\AutoBackupper\AutoBackupperGUI\wxCrafter;D:\_Programming\Projects\C++\Personal Projects\AutoBackupper\common\include;D:\_Programming\Tools\GitHub\bit7z\include;D:\_Programming\Tools\GitHub\wxWidgets\include\msvc;D:\_Programming\Tools\GitHub\wxWidgets\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AutoBackupperGUI\include;$(SolutionDir)AutoBackupperGUI\wxCrafter;$(SolutionDir)common\include;$(SolutionDir)dependencies\bit7z\include;$(SolutionDir)dependencies\wxWidgets\include;$(SolutionDir)dependencies\wxWidgets\include\msvc</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\bit7z\lib\x64;$(SolutionDir)dependencies\wxWidgets\out\build\x64-Debug\lib\vc_x64_lib;$(WindowsSDK_LibraryPath)\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>bit7z.lib;user32.lib;oleaut32.lib;taskschd.lib;comsupp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\bit7z\lib\x64;$(SolutionDir)dependencies\wxWidgets\lib\vc_x64_lib;$(WindowsSDK_LibraryPath)\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bit7z64_d.lib;user32.lib;oleaut32.lib;taskschd.lib;comsupp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -166,18 +169,19 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;BIT7Z_USE_NATIVE_STRING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)AutoBackupperGUI\include;$(SolutionDir)AutoBackupperGUI\wxCrafter;$(SolutionDir)common\include;$(SolutionDir)dependencies\bit7z\include;$(SolutionDir)dependencies\wxWidgets\include\msvc;$(SolutionDir)dependencies\wxWidgets\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AutoBackupperGUI\include;$(SolutionDir)AutoBackupperGUI\wxCrafter;$(SolutionDir)common\include;$(SolutionDir)dependencies\bit7z\include;$(SolutionDir)dependencies\wxWidgets\include;$(SolutionDir)dependencies\wxWidgets\include\msvc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\bit7z\lib\x64;$(SolutionDir)dependencies\wxWidgets\out\build\x64-Release\lib\vc_x64_lib;$(WindowsSDK_LibraryPath)\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>bit7z.lib;user32.lib;oleaut32.lib;taskschd.lib;comsupp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\bit7z\lib\x64;$(SolutionDir)dependencies\wxWidgets\lib\vc_x64_lib;$(WindowsSDK_LibraryPath)\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bit7z64.lib;user32.lib;oleaut32.lib;taskschd.lib;comsupp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
