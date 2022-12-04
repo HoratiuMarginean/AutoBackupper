@@ -6,88 +6,101 @@
 
 #include "guibase.h"
 
-
 // Declare the bitmap loading function
 extern void wxCEEDFInitBitmapResources();
 
 static bool bBitmapLoaded = false;
 
-
-NewTriggerDialogBase::NewTriggerDialogBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+NewTriggerDialogBase::NewTriggerDialogBase(wxWindow* parent,
+    wxWindowID id,
+    const wxString& title,
+    const wxPoint& pos,
+    const wxSize& size,
+    long style)
     : wxDialog(parent, id, title, pos, size, style)
 {
-    if ( !bBitmapLoaded ) {
+    if(!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
         wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
         wxCEEDFInitBitmapResources();
         bBitmapLoaded = true;
     }
     this->Hide();
-    
+
     wxBoxSizer* sizerNewTrigger = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(sizerNewTrigger);
-    
+
     wxBoxSizer* sizerControls = new wxBoxSizer(wxHORIZONTAL);
-    
-    sizerNewTrigger->Add(sizerControls, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    sizerNewTrigger->Add(sizerControls, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
     wxArrayString radioBoxFrequencyArr;
     radioBoxFrequencyArr.Add(_("One Time"));
     radioBoxFrequencyArr.Add(_("Daily"));
     radioBoxFrequencyArr.Add(_("Weekly"));
-    radioBoxFrequency = new wxRadioBox(this, wxID_ANY, _("Frequency"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), radioBoxFrequencyArr, 1, 0);
+    radioBoxFrequency = new wxRadioBox(this, wxID_ANY, _("Frequency"), wxDefaultPosition,
+        wxDLG_UNIT(this, wxSize(-1, -1)), radioBoxFrequencyArr, 1, 0);
     radioBoxFrequency->SetSelection(0);
-    
-    sizerControls->Add(radioBoxFrequency, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-    
+
+    sizerControls->Add(radioBoxFrequency, 0, wxALL | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
     wxBoxSizer* sizerDateTimeRecurrence = new wxBoxSizer(wxVERTICAL);
-    
+
     sizerControls->Add(sizerDateTimeRecurrence, 0, 0, WXC_FROM_DIP(5));
-    
-    wxStaticBoxSizer* sizerDateTime = new wxStaticBoxSizer( new wxStaticBox(this, wxID_ANY, _("Start date and time")), wxHORIZONTAL);
-    
+
+    wxStaticBoxSizer* sizerDateTime =
+        new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Start date and time")), wxHORIZONTAL);
+
     sizerDateTimeRecurrence->Add(sizerDateTime, 0, wxALL, WXC_FROM_DIP(5));
-    
-    datePickerStart = new wxDatePickerCtrl(this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxDP_DROPDOWN);
-    
+
+    datePickerStart = new wxDatePickerCtrl(
+        this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxDP_DROPDOWN);
+
     sizerDateTime->Add(datePickerStart, 0, wxALL, WXC_FROM_DIP(5));
-    
-    timePickerStart = new wxTimePickerCtrl(this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTP_DEFAULT);
-    
+
+    timePickerStart = new wxTimePickerCtrl(
+        this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxTP_DEFAULT);
+
     sizerDateTime->Add(timePickerStart, 0, wxALL, WXC_FROM_DIP(5));
-    
-    panelRecurrenceDays = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxTAB_TRAVERSAL|wxBORDER_THEME);
-    
-    sizerDateTimeRecurrence->Add(panelRecurrenceDays, 1, wxLEFT|wxRIGHT|wxTOP|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    panelRecurrenceDays = new wxPanel(
+        this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxTAB_TRAVERSAL | wxBORDER_THEME);
+
+    sizerDateTimeRecurrence->Add(panelRecurrenceDays, 1, wxLEFT | wxRIGHT | wxTOP | wxEXPAND, WXC_FROM_DIP(5));
+
     wxBoxSizer* sizerRecurrenceDays = new wxBoxSizer(wxHORIZONTAL);
     panelRecurrenceDays->SetSizer(sizerRecurrenceDays);
-    
+
     wxBoxSizer* sizerRecurrence = new wxBoxSizer(wxHORIZONTAL);
-    
-    sizerRecurrenceDays->Add(sizerRecurrence, 0, wxALL|wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-    
-    staticTextRecurrence = new wxStaticText(panelRecurrenceDays, wxID_ANY, _("Recur every"), wxDefaultPosition, wxDLG_UNIT(panelRecurrenceDays, wxSize(-1,-1)), 0);
+
+    sizerRecurrenceDays->Add(sizerRecurrence, 0, wxALL | wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
+
+    staticTextRecurrence = new wxStaticText(panelRecurrenceDays, wxID_ANY, _("Recur every"), wxDefaultPosition,
+        wxDLG_UNIT(panelRecurrenceDays, wxSize(-1, -1)), 0);
     staticTextRecurrence->Hide();
-    
-    sizerRecurrence->Add(staticTextRecurrence, 1, wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
-    
-    spinCtrlRecurrence = new wxSpinCtrl(panelRecurrenceDays, wxID_ANY, wxT("1"), wxDefaultPosition, wxDLG_UNIT(panelRecurrenceDays, wxSize(-1,-1)), wxSP_ARROW_KEYS);
+
+    sizerRecurrence->Add(
+        staticTextRecurrence, 1, wxALIGN_CENTER_VERTICAL | wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+
+    spinCtrlRecurrence = new wxSpinCtrl(panelRecurrenceDays, wxID_ANY, wxT("1"), wxDefaultPosition,
+        wxDLG_UNIT(panelRecurrenceDays, wxSize(-1, -1)), wxSP_ARROW_KEYS);
     spinCtrlRecurrence->Hide();
     spinCtrlRecurrence->SetRange(1, 999);
     spinCtrlRecurrence->SetValue(1);
-    
-    sizerRecurrence->Add(spinCtrlRecurrence, 0, wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
-    
-    staticTextRecurrenceUnit = new wxStaticText(panelRecurrenceDays, wxID_ANY, _("weeks on:"), wxDefaultPosition, wxDLG_UNIT(panelRecurrenceDays, wxSize(-1,-1)), wxST_NO_AUTORESIZE);
+
+    sizerRecurrence->Add(spinCtrlRecurrence, 0, wxALL | wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+
+    staticTextRecurrenceUnit = new wxStaticText(panelRecurrenceDays, wxID_ANY, _("weeks on:"), wxDefaultPosition,
+        wxDLG_UNIT(panelRecurrenceDays, wxSize(-1, -1)), wxST_NO_AUTORESIZE);
     staticTextRecurrenceUnit->Hide();
-    
-    sizerRecurrence->Add(staticTextRecurrenceUnit, 0, wxALIGN_CENTER_VERTICAL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
-    
+
+    sizerRecurrence->Add(
+        staticTextRecurrenceUnit, 0, wxALIGN_CENTER_VERTICAL | wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+
     wxBoxSizer* sizerDays = new wxBoxSizer(wxVERTICAL);
-    
+
     sizerRecurrenceDays->Add(sizerDays, 1, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString checkListBoxDaysArr;
     checkListBoxDaysArr.Add(_("Monday"));
     checkListBoxDaysArr.Add(_("Tuesday"));
@@ -96,29 +109,31 @@ NewTriggerDialogBase::NewTriggerDialogBase(wxWindow* parent, wxWindowID id, cons
     checkListBoxDaysArr.Add(_("Friday"));
     checkListBoxDaysArr.Add(_("Saturday"));
     checkListBoxDaysArr.Add(_("Sunday"));
-    checkListBoxDays = new wxCheckListBox(panelRecurrenceDays, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelRecurrenceDays, wxSize(-1,-1)), checkListBoxDaysArr, wxLB_NEEDED_SB|wxLB_HSCROLL|wxLB_SINGLE);
+    checkListBoxDays = new wxCheckListBox(panelRecurrenceDays, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelRecurrenceDays, wxSize(-1, -1)), checkListBoxDaysArr,
+        wxLB_NEEDED_SB | wxLB_HSCROLL | wxLB_SINGLE);
     checkListBoxDays->Hide();
-    
-    sizerDays->Add(checkListBoxDays, 0, wxALL|wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
-    
+
+    sizerDays->Add(checkListBoxDays, 0, wxALL | wxRESERVE_SPACE_EVEN_IF_HIDDEN, WXC_FROM_DIP(5));
+
     wxBoxSizer* sizerButtons = new wxBoxSizer(wxHORIZONTAL);
-    
-    sizerNewTrigger->Add(sizerButtons, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    sizerButtons->Add(0, 0, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    buttonAdd = new wxButton(this, wxID_ANY, _("Add"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
-    
+
+    sizerNewTrigger->Add(sizerButtons, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    sizerButtons->Add(0, 0, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    buttonAdd = new wxButton(this, wxID_ANY, _("Add"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
     sizerButtons->Add(buttonAdd, 0, wxALL, WXC_FROM_DIP(5));
-    
-    buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
-    
+
+    buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
     sizerButtons->Add(buttonCancel, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     SetName(wxT("NewTriggerDialogBase"));
-    SetSize(wxDLG_UNIT(this, wxSize(-1,-1)));
-    if (GetSizer()) {
-         GetSizer()->Fit(this);
+    SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
+    if(GetSizer()) {
+        GetSizer()->Fit(this);
     }
     if(GetParent()) {
         CentreOnParent(wxBOTH);
@@ -126,305 +141,344 @@ NewTriggerDialogBase::NewTriggerDialogBase(wxWindow* parent, wxWindowID id, cons
         CentreOnScreen(wxBOTH);
     }
     // Connect events
-    this->Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(NewTriggerDialogBase::OnCloseWindow), NULL, this);
-    radioBoxFrequency->Connect(wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(NewTriggerDialogBase::OnFrequencyRadioboxSelected), NULL, this);
-    checkListBoxDays->Connect(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, wxCommandEventHandler(NewTriggerDialogBase::OnDaysCheckListBoxToggled), NULL, this);
-    buttonAdd->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(NewTriggerDialogBase::OnAddButtonClicked), NULL, this);
-    buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(NewTriggerDialogBase::OnCancelButtonClicked), NULL, this);
-    
+    this->Bind(wxEVT_CLOSE_WINDOW, &NewTriggerDialogBase::OnCloseWindow, this);
+    radioBoxFrequency->Bind(wxEVT_COMMAND_RADIOBOX_SELECTED, &NewTriggerDialogBase::OnFrequencyRadioboxSelected, this);
+    checkListBoxDays->Bind(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &NewTriggerDialogBase::OnDaysCheckListBoxToggled, this);
+    buttonAdd->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &NewTriggerDialogBase::OnAddButtonClicked, this);
+    buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &NewTriggerDialogBase::OnCancelButtonClicked, this);
 }
 
 NewTriggerDialogBase::~NewTriggerDialogBase()
 {
-    this->Disconnect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(NewTriggerDialogBase::OnCloseWindow), NULL, this);
-    radioBoxFrequency->Disconnect(wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(NewTriggerDialogBase::OnFrequencyRadioboxSelected), NULL, this);
-    checkListBoxDays->Disconnect(wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, wxCommandEventHandler(NewTriggerDialogBase::OnDaysCheckListBoxToggled), NULL, this);
-    buttonAdd->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(NewTriggerDialogBase::OnAddButtonClicked), NULL, this);
-    buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(NewTriggerDialogBase::OnCancelButtonClicked), NULL, this);
-    
+    this->Unbind(wxEVT_CLOSE_WINDOW, &NewTriggerDialogBase::OnCloseWindow, this);
+    radioBoxFrequency->Unbind(
+        wxEVT_COMMAND_RADIOBOX_SELECTED, &NewTriggerDialogBase::OnFrequencyRadioboxSelected, this);
+    checkListBoxDays->Unbind(
+        wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, &NewTriggerDialogBase::OnDaysCheckListBoxToggled, this);
+    buttonAdd->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &NewTriggerDialogBase::OnAddButtonClicked, this);
+    buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &NewTriggerDialogBase::OnCancelButtonClicked, this);
 }
 
-SettingsFrameBase::SettingsFrameBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+SettingsFrameBase::SettingsFrameBase(wxWindow* parent,
+    wxWindowID id,
+    const wxString& title,
+    const wxPoint& pos,
+    const wxSize& size,
+    long style)
     : wxFrame(parent, id, title, pos, size, style)
 {
-    if ( !bBitmapLoaded ) {
+    if(!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
         wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
         wxCEEDFInitBitmapResources();
         bBitmapLoaded = true;
     }
     this->Hide();
-    
+
     wxBoxSizer* sizerSettings = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(sizerSettings);
-    
+
     wxBoxSizer* sizerNotebook = new wxBoxSizer(wxVERTICAL);
-    
+
     sizerSettings->Add(sizerNotebook, 1, wxEXPAND, WXC_FROM_DIP(5));
-    
-    notebookSettings = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxBK_DEFAULT);
+
+    notebookSettings =
+        new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBK_DEFAULT);
     notebookSettings->SetName(wxT("notebookSettings"));
-    
-    sizerNotebook->Add(notebookSettings, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    panelArchive = new wxPanel(notebookSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(notebookSettings, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+
+    sizerNotebook->Add(notebookSettings, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    panelArchive = new wxPanel(
+        notebookSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(notebookSettings, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     notebookSettings->AddPage(panelArchive, _("Archive"), true);
-    
+
     wxBoxSizer* sizerArchive = new wxBoxSizer(wxVERTICAL);
     panelArchive->SetSizer(sizerArchive);
-    
-    notebookArchiveSettings = new wxNotebook(panelArchive, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelArchive, wxSize(-1,-1)), wxNB_FIXEDWIDTH|wxBK_DEFAULT);
+
+    notebookArchiveSettings = new wxNotebook(panelArchive, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelArchive, wxSize(-1, -1)), wxNB_FIXEDWIDTH | wxBK_DEFAULT);
     notebookArchiveSettings->SetName(wxT("notebookArchiveSettings"));
-    
-    sizerArchive->Add(notebookArchiveSettings, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    panelGeneral = new wxPanel(notebookArchiveSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(notebookArchiveSettings, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+
+    sizerArchive->Add(notebookArchiveSettings, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    panelGeneral = new wxPanel(notebookArchiveSettings, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(notebookArchiveSettings, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     notebookArchiveSettings->AddPage(panelGeneral, _("General"), true);
-    
+
     wxBoxSizer* sizerGeneral = new wxBoxSizer(wxVERTICAL);
     panelGeneral->SetSizer(sizerGeneral);
-    
+
     wxBoxSizer* sizerDestinationPath = new wxBoxSizer(wxVERTICAL);
-    
-    sizerGeneral->Add(sizerDestinationPath, 0, wxTOP|wxEXPAND, WXC_FROM_DIP(5));
-    
-    staticTextDestinationPath = new wxStaticText(panelGeneral, wxID_ANY, _("Destination Path"), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1,-1)), 0);
-    
-    sizerDestinationPath->Add(staticTextDestinationPath, 0, wxLEFT|wxTOP, WXC_FROM_DIP(5));
-    
-    dirPickerDestinationPath = new wxDirPickerCtrl(panelGeneral, wxID_ANY, wxEmptyString, _("Select a path for your backup archive"), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1,-1)), wxDIRP_DEFAULT_STYLE);
-    
-    sizerDestinationPath->Add(dirPickerDestinationPath, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    sizerGeneral->Add(sizerDestinationPath, 0, wxTOP | wxEXPAND, WXC_FROM_DIP(5));
+
+    staticTextDestinationPath = new wxStaticText(
+        panelGeneral, wxID_ANY, _("Destination Path"), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1, -1)), 0);
+
+    sizerDestinationPath->Add(staticTextDestinationPath, 0, wxLEFT | wxTOP, WXC_FROM_DIP(5));
+
+    dirPickerDestinationPath =
+        new wxDirPickerCtrl(panelGeneral, wxID_ANY, wxEmptyString, _("Select a path for your backup archive"),
+            wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1, -1)), wxDIRP_DEFAULT_STYLE);
+
+    sizerDestinationPath->Add(dirPickerDestinationPath, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
     wxBoxSizer* sizerArchiveName = new wxBoxSizer(wxVERTICAL);
-    
-    sizerGeneral->Add(sizerArchiveName, 0, wxTOP|wxEXPAND, WXC_FROM_DIP(5));
-    
-    staticTextArchiveName = new wxStaticText(panelGeneral, wxID_ANY, _("Archive Name"), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1,-1)), 0);
-    
+
+    sizerGeneral->Add(sizerArchiveName, 0, wxTOP | wxEXPAND, WXC_FROM_DIP(5));
+
+    staticTextArchiveName = new wxStaticText(
+        panelGeneral, wxID_ANY, _("Archive Name"), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1, -1)), 0);
+
     sizerArchiveName->Add(staticTextArchiveName, 0, wxLEFT, WXC_FROM_DIP(5));
-    
+
     wxBoxSizer* sizerName = new wxBoxSizer(wxHORIZONTAL);
-    
-    sizerArchiveName->Add(sizerName, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    textCtrlArchiveName = new wxTextCtrl(panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1,-1)), 0);
-    #if wxVERSION_NUMBER >= 3000
+
+    sizerArchiveName->Add(sizerName, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    textCtrlArchiveName =
+        new wxTextCtrl(panelGeneral, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
     textCtrlArchiveName->SetHint(wxT(""));
-    #endif
-    
-    sizerName->Add(textCtrlArchiveName, 1, wxRIGHT|wxTOP|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
-    
-    staticTextUnderscore1 = new wxStaticText(panelGeneral, wxID_ANY, _("_"), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1,-1)), 0);
-    
-    sizerName->Add(staticTextUnderscore1, 0, wxBOTTOM|wxALIGN_BOTTOM, WXC_FROM_DIP(5));
-    
-    textCtrlDate = new wxTextCtrl(panelGeneral, wxID_ANY, wxT("*Current Date*"), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1,-1)), wxTE_READONLY|wxTE_NO_VSCROLL|wxTE_CENTRE);
-    #if wxVERSION_NUMBER >= 3000
+#endif
+
+    sizerName->Add(textCtrlArchiveName, 1, wxRIGHT | wxTOP | wxBOTTOM | wxEXPAND, WXC_FROM_DIP(5));
+
+    staticTextUnderscore1 = new wxStaticText(
+        panelGeneral, wxID_ANY, _("_"), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1, -1)), 0);
+
+    sizerName->Add(staticTextUnderscore1, 0, wxBOTTOM | wxALIGN_BOTTOM, WXC_FROM_DIP(5));
+
+    textCtrlDate = new wxTextCtrl(panelGeneral, wxID_ANY, wxT("*Current Date*"), wxDefaultPosition,
+        wxDLG_UNIT(panelGeneral, wxSize(-1, -1)), wxTE_READONLY | wxTE_NO_VSCROLL | wxTE_CENTRE);
+#if wxVERSION_NUMBER >= 3000
     textCtrlDate->SetHint(wxT(""));
-    #endif
-    
+#endif
+
     sizerName->Add(textCtrlDate, 0, wxALL, WXC_FROM_DIP(5));
-    
-    staticTextUnderscore2 = new wxStaticText(panelGeneral, wxID_ANY, _("_"), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1,-1)), 0);
-    
-    sizerName->Add(staticTextUnderscore2, 0, wxBOTTOM|wxALIGN_BOTTOM, WXC_FROM_DIP(5));
-    
-    textCtrlTime = new wxTextCtrl(panelGeneral, wxID_ANY, wxT("*Current Time*"), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1,-1)), wxTE_READONLY|wxTE_NO_VSCROLL|wxTE_CENTRE);
-    #if wxVERSION_NUMBER >= 3000
+
+    staticTextUnderscore2 = new wxStaticText(
+        panelGeneral, wxID_ANY, _("_"), wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1, -1)), 0);
+
+    sizerName->Add(staticTextUnderscore2, 0, wxBOTTOM | wxALIGN_BOTTOM, WXC_FROM_DIP(5));
+
+    textCtrlTime = new wxTextCtrl(panelGeneral, wxID_ANY, wxT("*Current Time*"), wxDefaultPosition,
+        wxDLG_UNIT(panelGeneral, wxSize(-1, -1)), wxTE_READONLY | wxTE_NO_VSCROLL | wxTE_CENTRE);
+#if wxVERSION_NUMBER >= 3000
     textCtrlTime->SetHint(wxT(""));
-    #endif
-    
+#endif
+
     sizerName->Add(textCtrlTime, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     wxBoxSizer* sizerCompressionUpdate = new wxBoxSizer(wxHORIZONTAL);
-    
+
     sizerGeneral->Add(sizerCompressionUpdate, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxStaticBoxSizer* sizerCompressionLevel = new wxStaticBoxSizer( new wxStaticBox(panelGeneral, wxID_ANY, _("Compression Level")), wxVERTICAL);
-    
+
+    wxStaticBoxSizer* sizerCompressionLevel =
+        new wxStaticBoxSizer(new wxStaticBox(panelGeneral, wxID_ANY, _("Compression Level")), wxVERTICAL);
+
     sizerCompressionUpdate->Add(sizerCompressionLevel, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceCompressionLevelArr;
-    choiceCompressionLevelArr.Add(wxT("Copy"));
-    choiceCompressionLevelArr.Add(wxT("Fastest"));
-    choiceCompressionLevelArr.Add(wxT("Fast"));
-    choiceCompressionLevelArr.Add(wxT("Normal"));
-    choiceCompressionLevelArr.Add(wxT("High"));
-    choiceCompressionLevelArr.Add(wxT("Max"));
-    choiceCompressionLevel = new wxChoice(panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1,-1)), choiceCompressionLevelArr, 0);
+    choiceCompressionLevelArr.Add(_("Copy"));
+    choiceCompressionLevelArr.Add(_("Fastest"));
+    choiceCompressionLevelArr.Add(_("Fast"));
+    choiceCompressionLevelArr.Add(_("Normal"));
+    choiceCompressionLevelArr.Add(_("High"));
+    choiceCompressionLevelArr.Add(_("Max"));
+    choiceCompressionLevel = new wxChoice(panelGeneral, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelGeneral, wxSize(-1, -1)), choiceCompressionLevelArr, 0);
     choiceCompressionLevel->SetSelection(3);
-    
-    sizerCompressionLevel->Add(choiceCompressionLevel, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    sizerCompressionUpdate->Add(0, 0, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxStaticBoxSizer* sizerUpdateMode = new wxStaticBoxSizer( new wxStaticBox(panelGeneral, wxID_ANY, _("Update Mode")), wxVERTICAL);
-    
+
+    sizerCompressionLevel->Add(choiceCompressionLevel, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    sizerCompressionUpdate->Add(0, 0, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    wxStaticBoxSizer* sizerUpdateMode =
+        new wxStaticBoxSizer(new wxStaticBox(panelGeneral, wxID_ANY, _("Update Mode")), wxVERTICAL);
+
     sizerCompressionUpdate->Add(sizerUpdateMode, 1, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceUpdateModeArr;
-    choiceUpdateModeArr.Add(wxT("None"));
-    choiceUpdateModeArr.Add(wxT("Append"));
-    choiceUpdateModeArr.Add(wxT("Overwrite"));
-    choiceUpdateMode = new wxChoice(panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1,-1)), choiceUpdateModeArr, 0);
+    choiceUpdateModeArr.Add(_("None"));
+    choiceUpdateModeArr.Add(_("Append"));
+    choiceUpdateModeArr.Add(_("Overwrite"));
+    choiceUpdateMode = new wxChoice(
+        panelGeneral, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelGeneral, wxSize(-1, -1)), choiceUpdateModeArr, 0);
     choiceUpdateMode->SetSelection(2);
-    
-    sizerUpdateMode->Add(choiceUpdateMode, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    choiceUpdateMode->SetMinSize(wxSize(100,-1));
-    
-    panelAdvanced = new wxPanel(notebookArchiveSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(notebookArchiveSettings, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+
+    sizerUpdateMode->Add(choiceUpdateMode, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    choiceUpdateMode->SetMinSize(wxSize(100, -1));
+
+    panelAdvanced = new wxPanel(notebookArchiveSettings, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(notebookArchiveSettings, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     notebookArchiveSettings->AddPage(panelAdvanced, _("Advanced"), false);
-    
+
     wxBoxSizer* sizerAdvanced = new wxBoxSizer(wxVERTICAL);
     panelAdvanced->SetSizer(sizerAdvanced);
-    
+
     wxBoxSizer* sizerFormatCompressionDictionary = new wxBoxSizer(wxHORIZONTAL);
-    
-    sizerAdvanced->Add(sizerFormatCompressionDictionary, 0, wxTOP|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    sizerAdvanced->Add(sizerFormatCompressionDictionary, 0, wxTOP | wxEXPAND, WXC_FROM_DIP(5));
+
     wxArrayString radioBoxFormatArr;
     radioBoxFormatArr.Add(_("*.7z"));
     radioBoxFormatArr.Add(_("*.zip"));
-    radioBoxFormat = new wxRadioBox(panelAdvanced, wxID_ANY, _("Format"), wxDefaultPosition, wxDLG_UNIT(panelAdvanced, wxSize(-1,-1)), radioBoxFormatArr, 1, wxRA_SPECIFY_ROWS);
+    radioBoxFormat = new wxRadioBox(panelAdvanced, wxID_ANY, _("Format"), wxDefaultPosition,
+        wxDLG_UNIT(panelAdvanced, wxSize(-1, -1)), radioBoxFormatArr, 1, wxRA_SPECIFY_ROWS);
     radioBoxFormat->SetSelection(0);
-    
-    sizerFormatCompressionDictionary->Add(radioBoxFormat, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxStaticBoxSizer* sizerCompressionMethod = new wxStaticBoxSizer( new wxStaticBox(panelAdvanced, wxID_ANY, _("Compression Method")), wxHORIZONTAL);
-    
+
+    sizerFormatCompressionDictionary->Add(radioBoxFormat, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    wxStaticBoxSizer* sizerCompressionMethod =
+        new wxStaticBoxSizer(new wxStaticBox(panelAdvanced, wxID_ANY, _("Compression Method")), wxHORIZONTAL);
+
     sizerFormatCompressionDictionary->Add(sizerCompressionMethod, 1, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceCompressionMethodArr;
-    choiceCompressionMethodArr.Add(wxT("BZip2"));
-    choiceCompressionMethodArr.Add(wxT("LZMA"));
-    choiceCompressionMethodArr.Add(wxT("LZMA2"));
-    choiceCompressionMethodArr.Add(wxT("PPMd"));
-    choiceCompressionMethod = new wxChoice(panelAdvanced, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelAdvanced, wxSize(-1,-1)), choiceCompressionMethodArr, 0);
+    choiceCompressionMethodArr.Add(_("BZip2"));
+    choiceCompressionMethodArr.Add(_("LZMA"));
+    choiceCompressionMethodArr.Add(_("LZMA2"));
+    choiceCompressionMethodArr.Add(_("PPMd"));
+    choiceCompressionMethod = new wxChoice(panelAdvanced, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelAdvanced, wxSize(-1, -1)), choiceCompressionMethodArr, 0);
     choiceCompressionMethod->SetSelection(2);
-    
-    sizerCompressionMethod->Add(choiceCompressionMethod, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    choiceCompressionMethod->SetMinSize(wxSize(100,-1));
-    
-    wxStaticBoxSizer* sizerDictionarySize = new wxStaticBoxSizer( new wxStaticBox(panelAdvanced, wxID_ANY, _("Dictionary Size")), wxVERTICAL);
-    
+
+    sizerCompressionMethod->Add(choiceCompressionMethod, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    choiceCompressionMethod->SetMinSize(wxSize(100, -1));
+
+    wxStaticBoxSizer* sizerDictionarySize =
+        new wxStaticBoxSizer(new wxStaticBox(panelAdvanced, wxID_ANY, _("Dictionary Size")), wxVERTICAL);
+
     sizerFormatCompressionDictionary->Add(sizerDictionarySize, 1, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceDictionarySizeArr;
-    choiceDictionarySizeArr.Add(wxT("64 KB"));
-    choiceDictionarySizeArr.Add(wxT("256 KB"));
-    choiceDictionarySizeArr.Add(wxT("1 MB"));
-    choiceDictionarySizeArr.Add(wxT("2 MB"));
-    choiceDictionarySizeArr.Add(wxT("4 MB"));
-    choiceDictionarySizeArr.Add(wxT("8 MB"));
-    choiceDictionarySizeArr.Add(wxT("16 MB"));
-    choiceDictionarySizeArr.Add(wxT("32 MB"));
-    choiceDictionarySizeArr.Add(wxT("64 MB"));
-    choiceDictionarySizeArr.Add(wxT("128 MB"));
-    choiceDictionarySizeArr.Add(wxT("256 MB"));
-    choiceDictionarySizeArr.Add(wxT("512 MB"));
-    choiceDictionarySizeArr.Add(wxT("1024 MB"));
-    choiceDictionarySize = new wxChoice(panelAdvanced, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelAdvanced, wxSize(-1,-1)), choiceDictionarySizeArr, 0);
+    choiceDictionarySizeArr.Add(_("64 KB"));
+    choiceDictionarySizeArr.Add(_("256 KB"));
+    choiceDictionarySizeArr.Add(_("1 MB"));
+    choiceDictionarySizeArr.Add(_("2 MB"));
+    choiceDictionarySizeArr.Add(_("4 MB"));
+    choiceDictionarySizeArr.Add(_("8 MB"));
+    choiceDictionarySizeArr.Add(_("16 MB"));
+    choiceDictionarySizeArr.Add(_("32 MB"));
+    choiceDictionarySizeArr.Add(_("64 MB"));
+    choiceDictionarySizeArr.Add(_("128 MB"));
+    choiceDictionarySizeArr.Add(_("256 MB"));
+    choiceDictionarySizeArr.Add(_("512 MB"));
+    choiceDictionarySizeArr.Add(_("1024 MB"));
+    choiceDictionarySize = new wxChoice(panelAdvanced, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelAdvanced, wxSize(-1, -1)), choiceDictionarySizeArr, 0);
     choiceDictionarySize->SetSelection(6);
-    
-    sizerDictionarySize->Add(choiceDictionarySize, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    sizerDictionarySize->Add(choiceDictionarySize, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
     wxBoxSizer* sizerThreadVolumeSolid = new wxBoxSizer(wxHORIZONTAL);
-    
+
     sizerAdvanced->Add(sizerThreadVolumeSolid, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxStaticBoxSizer* sizerThreadCount = new wxStaticBoxSizer( new wxStaticBox(panelAdvanced, wxID_ANY, _("Thread Count")), wxVERTICAL);
-    
+
+    wxStaticBoxSizer* sizerThreadCount =
+        new wxStaticBoxSizer(new wxStaticBox(panelAdvanced, wxID_ANY, _("Thread Count")), wxVERTICAL);
+
     sizerThreadVolumeSolid->Add(sizerThreadCount, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceThreadCountArr;
-    choiceThreadCount = new wxChoice(panelAdvanced, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelAdvanced, wxSize(-1,-1)), choiceThreadCountArr, 0);
-    
-    sizerThreadCount->Add(choiceThreadCount, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxStaticBoxSizer* sizerVolumeSize = new wxStaticBoxSizer( new wxStaticBox(panelAdvanced, wxID_ANY, _("Volume Size")), wxHORIZONTAL);
-    
+    choiceThreadCount = new wxChoice(
+        panelAdvanced, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelAdvanced, wxSize(-1, -1)), choiceThreadCountArr, 0);
+
+    sizerThreadCount->Add(choiceThreadCount, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    wxStaticBoxSizer* sizerVolumeSize =
+        new wxStaticBoxSizer(new wxStaticBox(panelAdvanced, wxID_ANY, _("Volume Size")), wxHORIZONTAL);
+
     sizerThreadVolumeSolid->Add(sizerVolumeSize, 0, wxALL, WXC_FROM_DIP(5));
-    
-    textCtrlVolumeSize = new wxTextCtrl(panelAdvanced, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(panelAdvanced, wxSize(-1,-1)), wxTE_RIGHT);
-    #if wxVERSION_NUMBER >= 3000
+
+    textCtrlVolumeSize = new wxTextCtrl(
+        panelAdvanced, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(panelAdvanced, wxSize(-1, -1)), wxTE_RIGHT);
+#if wxVERSION_NUMBER >= 3000
     textCtrlVolumeSize->SetHint(wxT(""));
-    #endif
-    
+#endif
+
     sizerVolumeSize->Add(textCtrlVolumeSize, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceVolumeSizeUnitArr;
-    choiceVolumeSizeUnitArr.Add(wxT("B"));
-    choiceVolumeSizeUnitArr.Add(wxT("KB"));
-    choiceVolumeSizeUnitArr.Add(wxT("MB"));
-    choiceVolumeSizeUnitArr.Add(wxT("GB"));
-    choiceVolumeSizeUnit = new wxChoice(panelAdvanced, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelAdvanced, wxSize(-1,-1)), choiceVolumeSizeUnitArr, 0);
+    choiceVolumeSizeUnitArr.Add(_("B"));
+    choiceVolumeSizeUnitArr.Add(_("KB"));
+    choiceVolumeSizeUnitArr.Add(_("MB"));
+    choiceVolumeSizeUnitArr.Add(_("GB"));
+    choiceVolumeSizeUnit = new wxChoice(panelAdvanced, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelAdvanced, wxSize(-1, -1)), choiceVolumeSizeUnitArr, 0);
     choiceVolumeSizeUnit->SetSelection(2);
-    
+
     sizerVolumeSize->Add(choiceVolumeSizeUnit, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     wxBoxSizer* sizerSolidMode = new wxBoxSizer(wxVERTICAL);
-    
+
     sizerThreadVolumeSolid->Add(sizerSolidMode, 1, wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-    
-    checkBoxSolidMode = new wxCheckBox(panelAdvanced, wxID_ANY, _("Solid Mode"), wxDefaultPosition, wxDLG_UNIT(panelAdvanced, wxSize(-1,-1)), 0);
+
+    checkBoxSolidMode = new wxCheckBox(
+        panelAdvanced, wxID_ANY, _("Solid Mode"), wxDefaultPosition, wxDLG_UNIT(panelAdvanced, wxSize(-1, -1)), 0);
     checkBoxSolidMode->SetValue(false);
-    
-    sizerSolidMode->Add(checkBoxSolidMode, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    panelSchedule = new wxPanel(notebookSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(notebookSettings, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+
+    sizerSolidMode->Add(checkBoxSolidMode, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    panelSchedule = new wxPanel(
+        notebookSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(notebookSettings, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     notebookSettings->AddPage(panelSchedule, _("Schedule"), false);
-    
+
     wxBoxSizer* sizerSchedule = new wxBoxSizer(wxHORIZONTAL);
     panelSchedule->SetSizer(sizerSchedule);
-    
+
     wxBoxSizer* sizerTriggerList = new wxBoxSizer(wxVERTICAL);
-    
+
     sizerSchedule->Add(sizerTriggerList, 1, wxEXPAND, WXC_FROM_DIP(5));
-    
-    staticTextTriggerList = new wxStaticText(panelSchedule, wxID_ANY, _("Active Triggers"), wxDefaultPosition, wxDLG_UNIT(panelSchedule, wxSize(-1,-1)), 0);
-    
-    sizerTriggerList->Add(staticTextTriggerList, 0, wxLEFT|wxRIGHT|wxTOP, WXC_FROM_DIP(5));
-    
-    triggerList = new wxListCtrl(panelSchedule, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelSchedule, wxSize(-1,-1)), wxLC_SINGLE_SEL|wxLC_REPORT);
-    
-    sizerTriggerList->Add(triggerList, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    staticTextTriggerList = new wxStaticText(
+        panelSchedule, wxID_ANY, _("Active Triggers"), wxDefaultPosition, wxDLG_UNIT(panelSchedule, wxSize(-1, -1)), 0);
+
+    sizerTriggerList->Add(staticTextTriggerList, 0, wxLEFT | wxRIGHT | wxTOP, WXC_FROM_DIP(5));
+
+    triggerList = new wxListCtrl(panelSchedule, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelSchedule, wxSize(-1, -1)),
+        wxLC_SINGLE_SEL | wxLC_REPORT);
+
+    sizerTriggerList->Add(triggerList, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
     triggerList->InsertColumn(triggerList->GetColumnCount(), _("Type"), wxLIST_FORMAT_LEFT, -1);
     triggerList->InsertColumn(triggerList->GetColumnCount(), _("Details"), wxLIST_FORMAT_LEFT, -1);
     wxBoxSizer* sizerTriggerListButtons = new wxBoxSizer(wxHORIZONTAL);
-    
+
     sizerTriggerList->Add(sizerTriggerListButtons, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    buttonNew = new wxButton(panelSchedule, wxID_ANY, _("New"), wxDefaultPosition, wxDLG_UNIT(panelSchedule, wxSize(-1,-1)), 0);
-    
+
+    buttonNew = new wxButton(
+        panelSchedule, wxID_ANY, _("New"), wxDefaultPosition, wxDLG_UNIT(panelSchedule, wxSize(-1, -1)), 0);
+
     sizerTriggerListButtons->Add(buttonNew, 0, wxALL, WXC_FROM_DIP(5));
-    
-    buttonRemove = new wxButton(panelSchedule, wxID_ANY, _("Remove"), wxDefaultPosition, wxDLG_UNIT(panelSchedule, wxSize(-1,-1)), 0);
+
+    buttonRemove = new wxButton(
+        panelSchedule, wxID_ANY, _("Remove"), wxDefaultPosition, wxDLG_UNIT(panelSchedule, wxSize(-1, -1)), 0);
     buttonRemove->Enable(false);
-    
+
     sizerTriggerListButtons->Add(buttonRemove, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     wxBoxSizer* sizerButtons = new wxBoxSizer(wxHORIZONTAL);
-    
+
     sizerSettings->Add(sizerButtons, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
+
     sizerButtons->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
-    
-    buttonSave = new wxButton(this, wxID_ANY, _("Save"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+
+    buttonSave = new wxButton(this, wxID_ANY, _("Save"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     buttonSave->SetDefault();
-    
+
     sizerButtons->Add(buttonSave, 0, wxALL, WXC_FROM_DIP(5));
-    
-    buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
-    
+
+    buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
     sizerButtons->Add(buttonCancel, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     SetName(wxT("SettingsFrameBase"));
-    SetMinClientSize(wxSize(480,-1));
-    SetSize(wxDLG_UNIT(this, wxSize(-1,-1)));
-    if (GetSizer()) {
-         GetSizer()->Fit(this);
+    SetMinClientSize(wxSize(480, -1));
+    SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
+    if(GetSizer()) {
+        GetSizer()->Fit(this);
     }
     if(GetParent()) {
         CentreOnParent(wxBOTH);
@@ -432,285 +486,323 @@ SettingsFrameBase::SettingsFrameBase(wxWindow* parent, wxWindowID id, const wxSt
         CentreOnScreen(wxBOTH);
     }
     // Connect events
-    this->Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(SettingsFrameBase::OnCloseWindow), NULL, this);
-    dirPickerDestinationPath->Connect(wxEVT_COMMAND_DIRPICKER_CHANGED, wxFileDirPickerEventHandler(SettingsFrameBase::OnDestinationPathDirPickerChanged), NULL, this);
-    textCtrlArchiveName->Connect(wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(SettingsFrameBase::OnArchiveNameTextUpdated), NULL, this);
-    choiceCompressionLevel->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnCompressionLevelChoiceSelected), NULL, this);
-    choiceUpdateMode->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnUpdateModeChoiceSelected), NULL, this);
-    radioBoxFormat->Connect(wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnFormatRadioBoxSelected), NULL, this);
-    choiceCompressionMethod->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnCompressionMethodChoiceSelected), NULL, this);
-    choiceDictionarySize->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnDictionarySizeChoiceSelected), NULL, this);
-    choiceThreadCount->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnThreadCountChoiceSelected), NULL, this);
-    textCtrlVolumeSize->Connect(wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(SettingsFrameBase::OnVolumeSizeTextUpdated), NULL, this);
-    choiceVolumeSizeUnit->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnVolumeSizeUnitChoiceSelected), NULL, this);
-    checkBoxSolidMode->Connect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SettingsFrameBase::OnSolidModeCheckboxClicked), NULL, this);
-    triggerList->Connect(wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler(SettingsFrameBase::OnTriggerListItemSelected), NULL, this);
-    triggerList->Connect(wxEVT_COMMAND_LIST_ITEM_DESELECTED, wxListEventHandler(SettingsFrameBase::OnTriggerListItemDeselected), NULL, this);
-    buttonNew->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingsFrameBase::OnNewButtonClicked), NULL, this);
-    buttonRemove->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingsFrameBase::OnRemoveButtonClicked), NULL, this);
-    buttonSave->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingsFrameBase::OnSaveButtonClicked), NULL, this);
-    buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingsFrameBase::OnCancelButtonClicked), NULL, this);
-    
+    this->Bind(wxEVT_CLOSE_WINDOW, &SettingsFrameBase::OnCloseWindow, this);
+    dirPickerDestinationPath->Bind(
+        wxEVT_COMMAND_DIRPICKER_CHANGED, &SettingsFrameBase::OnDestinationPathDirPickerChanged, this);
+    textCtrlArchiveName->Bind(wxEVT_COMMAND_TEXT_UPDATED, &SettingsFrameBase::OnArchiveNameTextUpdated, this);
+    choiceCompressionLevel->Bind(
+        wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnCompressionLevelChoiceSelected, this);
+    choiceUpdateMode->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnUpdateModeChoiceSelected, this);
+    radioBoxFormat->Bind(wxEVT_COMMAND_RADIOBOX_SELECTED, &SettingsFrameBase::OnFormatRadioBoxSelected, this);
+    choiceCompressionMethod->Bind(
+        wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnCompressionMethodChoiceSelected, this);
+    choiceDictionarySize->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnDictionarySizeChoiceSelected, this);
+    choiceThreadCount->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnThreadCountChoiceSelected, this);
+    textCtrlVolumeSize->Bind(wxEVT_COMMAND_TEXT_UPDATED, &SettingsFrameBase::OnVolumeSizeTextUpdated, this);
+    choiceVolumeSizeUnit->Bind(wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnVolumeSizeUnitChoiceSelected, this);
+    checkBoxSolidMode->Bind(wxEVT_COMMAND_CHECKBOX_CLICKED, &SettingsFrameBase::OnSolidModeCheckboxClicked, this);
+    triggerList->Bind(wxEVT_COMMAND_LIST_ITEM_SELECTED, &SettingsFrameBase::OnTriggerListItemSelected, this);
+    triggerList->Bind(wxEVT_COMMAND_LIST_ITEM_DESELECTED, &SettingsFrameBase::OnTriggerListItemDeselected, this);
+    buttonNew->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &SettingsFrameBase::OnNewButtonClicked, this);
+    buttonRemove->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &SettingsFrameBase::OnRemoveButtonClicked, this);
+    buttonSave->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &SettingsFrameBase::OnSaveButtonClicked, this);
+    buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &SettingsFrameBase::OnCancelButtonClicked, this);
 }
 
 SettingsFrameBase::~SettingsFrameBase()
 {
-    this->Disconnect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(SettingsFrameBase::OnCloseWindow), NULL, this);
-    dirPickerDestinationPath->Disconnect(wxEVT_COMMAND_DIRPICKER_CHANGED, wxFileDirPickerEventHandler(SettingsFrameBase::OnDestinationPathDirPickerChanged), NULL, this);
-    textCtrlArchiveName->Disconnect(wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(SettingsFrameBase::OnArchiveNameTextUpdated), NULL, this);
-    choiceCompressionLevel->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnCompressionLevelChoiceSelected), NULL, this);
-    choiceUpdateMode->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnUpdateModeChoiceSelected), NULL, this);
-    radioBoxFormat->Disconnect(wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnFormatRadioBoxSelected), NULL, this);
-    choiceCompressionMethod->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnCompressionMethodChoiceSelected), NULL, this);
-    choiceDictionarySize->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnDictionarySizeChoiceSelected), NULL, this);
-    choiceThreadCount->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnThreadCountChoiceSelected), NULL, this);
-    textCtrlVolumeSize->Disconnect(wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(SettingsFrameBase::OnVolumeSizeTextUpdated), NULL, this);
-    choiceVolumeSizeUnit->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(SettingsFrameBase::OnVolumeSizeUnitChoiceSelected), NULL, this);
-    checkBoxSolidMode->Disconnect(wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SettingsFrameBase::OnSolidModeCheckboxClicked), NULL, this);
-    triggerList->Disconnect(wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler(SettingsFrameBase::OnTriggerListItemSelected), NULL, this);
-    triggerList->Disconnect(wxEVT_COMMAND_LIST_ITEM_DESELECTED, wxListEventHandler(SettingsFrameBase::OnTriggerListItemDeselected), NULL, this);
-    buttonNew->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingsFrameBase::OnNewButtonClicked), NULL, this);
-    buttonRemove->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingsFrameBase::OnRemoveButtonClicked), NULL, this);
-    buttonSave->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingsFrameBase::OnSaveButtonClicked), NULL, this);
-    buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(SettingsFrameBase::OnCancelButtonClicked), NULL, this);
-    
+    this->Unbind(wxEVT_CLOSE_WINDOW, &SettingsFrameBase::OnCloseWindow, this);
+    dirPickerDestinationPath->Unbind(
+        wxEVT_COMMAND_DIRPICKER_CHANGED, &SettingsFrameBase::OnDestinationPathDirPickerChanged, this);
+    textCtrlArchiveName->Unbind(wxEVT_COMMAND_TEXT_UPDATED, &SettingsFrameBase::OnArchiveNameTextUpdated, this);
+    choiceCompressionLevel->Unbind(
+        wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnCompressionLevelChoiceSelected, this);
+    choiceUpdateMode->Unbind(wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnUpdateModeChoiceSelected, this);
+    radioBoxFormat->Unbind(wxEVT_COMMAND_RADIOBOX_SELECTED, &SettingsFrameBase::OnFormatRadioBoxSelected, this);
+    choiceCompressionMethod->Unbind(
+        wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnCompressionMethodChoiceSelected, this);
+    choiceDictionarySize->Unbind(
+        wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnDictionarySizeChoiceSelected, this);
+    choiceThreadCount->Unbind(wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnThreadCountChoiceSelected, this);
+    textCtrlVolumeSize->Unbind(wxEVT_COMMAND_TEXT_UPDATED, &SettingsFrameBase::OnVolumeSizeTextUpdated, this);
+    choiceVolumeSizeUnit->Unbind(
+        wxEVT_COMMAND_CHOICE_SELECTED, &SettingsFrameBase::OnVolumeSizeUnitChoiceSelected, this);
+    checkBoxSolidMode->Unbind(wxEVT_COMMAND_CHECKBOX_CLICKED, &SettingsFrameBase::OnSolidModeCheckboxClicked, this);
+    triggerList->Unbind(wxEVT_COMMAND_LIST_ITEM_SELECTED, &SettingsFrameBase::OnTriggerListItemSelected, this);
+    triggerList->Unbind(wxEVT_COMMAND_LIST_ITEM_DESELECTED, &SettingsFrameBase::OnTriggerListItemDeselected, this);
+    buttonNew->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &SettingsFrameBase::OnNewButtonClicked, this);
+    buttonRemove->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &SettingsFrameBase::OnRemoveButtonClicked, this);
+    buttonSave->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &SettingsFrameBase::OnSaveButtonClicked, this);
+    buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &SettingsFrameBase::OnCancelButtonClicked, this);
 }
 
-ManualBackupDialogBase::ManualBackupDialogBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+ManualBackupDialogBase::ManualBackupDialogBase(wxWindow* parent,
+    wxWindowID id,
+    const wxString& title,
+    const wxPoint& pos,
+    const wxSize& size,
+    long style)
     : wxDialog(parent, id, title, pos, size, style)
 {
-    if ( !bBitmapLoaded ) {
+    if(!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
         wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
         wxCEEDFInitBitmapResources();
         bBitmapLoaded = true;
     }
     this->Hide();
-    
+
     wxBoxSizer* sizerArchiveOptions = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(sizerArchiveOptions);
-    
+
     wxBoxSizer* sizerNotebook = new wxBoxSizer(wxVERTICAL);
-    
+
     sizerArchiveOptions->Add(sizerNotebook, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    notebookArchiveSettings = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxNB_FIXEDWIDTH|wxBK_DEFAULT);
+
+    notebookArchiveSettings = new wxNotebook(
+        this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxNB_FIXEDWIDTH | wxBK_DEFAULT);
     notebookArchiveSettings->SetName(wxT("notebookArchiveSettings"));
-    
-    sizerNotebook->Add(notebookArchiveSettings, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    panelGeneralSettings = new wxPanel(notebookArchiveSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(notebookArchiveSettings, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+
+    sizerNotebook->Add(notebookArchiveSettings, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    panelGeneralSettings = new wxPanel(notebookArchiveSettings, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(notebookArchiveSettings, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     notebookArchiveSettings->AddPage(panelGeneralSettings, _("General"), true);
-    
+
     wxBoxSizer* sizerGeneralSettings = new wxBoxSizer(wxVERTICAL);
     panelGeneralSettings->SetSizer(sizerGeneralSettings);
-    
+
     wxBoxSizer* sizerDestinationPath = new wxBoxSizer(wxVERTICAL);
-    
-    sizerGeneralSettings->Add(sizerDestinationPath, 0, wxTOP|wxEXPAND, WXC_FROM_DIP(5));
-    
-    staticTextDestinationPath = new wxStaticText(panelGeneralSettings, wxID_ANY, _("Destination Path"), wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1,-1)), 0);
-    
-    sizerDestinationPath->Add(staticTextDestinationPath, 0, wxLEFT|wxTOP, WXC_FROM_DIP(5));
-    
-    dirPickerDestinationPath = new wxDirPickerCtrl(panelGeneralSettings, wxID_ANY, wxEmptyString, _("Select a path for your backup archive"), wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1,-1)), wxDIRP_DEFAULT_STYLE);
-    
-    sizerDestinationPath->Add(dirPickerDestinationPath, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    sizerGeneralSettings->Add(sizerDestinationPath, 0, wxTOP | wxEXPAND, WXC_FROM_DIP(5));
+
+    staticTextDestinationPath = new wxStaticText(panelGeneralSettings, wxID_ANY, _("Destination Path"),
+        wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1, -1)), 0);
+
+    sizerDestinationPath->Add(staticTextDestinationPath, 0, wxLEFT | wxTOP, WXC_FROM_DIP(5));
+
+    dirPickerDestinationPath =
+        new wxDirPickerCtrl(panelGeneralSettings, wxID_ANY, wxEmptyString, _("Select a path for your backup archive"),
+            wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1, -1)), wxDIRP_DEFAULT_STYLE);
+
+    sizerDestinationPath->Add(dirPickerDestinationPath, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
     wxBoxSizer* sizerArchiveName = new wxBoxSizer(wxVERTICAL);
-    
-    sizerGeneralSettings->Add(sizerArchiveName, 0, wxTOP|wxEXPAND, WXC_FROM_DIP(5));
-    
-    staticTextArchiveName = new wxStaticText(panelGeneralSettings, wxID_ANY, _("Archive Name"), wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1,-1)), 0);
-    
+
+    sizerGeneralSettings->Add(sizerArchiveName, 0, wxTOP | wxEXPAND, WXC_FROM_DIP(5));
+
+    staticTextArchiveName = new wxStaticText(panelGeneralSettings, wxID_ANY, _("Archive Name"), wxDefaultPosition,
+        wxDLG_UNIT(panelGeneralSettings, wxSize(-1, -1)), 0);
+
     sizerArchiveName->Add(staticTextArchiveName, 0, wxLEFT, WXC_FROM_DIP(5));
-    
+
     wxBoxSizer* sizerName = new wxBoxSizer(wxHORIZONTAL);
-    
-    sizerArchiveName->Add(sizerName, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    textCtrlArchiveName = new wxTextCtrl(panelGeneralSettings, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1,-1)), 0);
-    #if wxVERSION_NUMBER >= 3000
+
+    sizerArchiveName->Add(sizerName, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    textCtrlArchiveName = new wxTextCtrl(panelGeneralSettings, wxID_ANY, wxT(""), wxDefaultPosition,
+        wxDLG_UNIT(panelGeneralSettings, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
     textCtrlArchiveName->SetHint(wxT(""));
-    #endif
-    
-    sizerName->Add(textCtrlArchiveName, 1, wxRIGHT|wxTOP|wxBOTTOM|wxEXPAND, WXC_FROM_DIP(5));
-    
-    staticTextUnderscore1 = new wxStaticText(panelGeneralSettings, wxID_ANY, _("_"), wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1,-1)), 0);
-    
-    sizerName->Add(staticTextUnderscore1, 0, wxBOTTOM|wxALIGN_BOTTOM, WXC_FROM_DIP(5));
-    
-    textCtrlDate = new wxTextCtrl(panelGeneralSettings, wxID_ANY, wxT("*Current Date*"), wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1,-1)), wxTE_READONLY|wxTE_NO_VSCROLL|wxTE_CENTRE);
-    #if wxVERSION_NUMBER >= 3000
+#endif
+
+    sizerName->Add(textCtrlArchiveName, 1, wxRIGHT | wxTOP | wxBOTTOM | wxEXPAND, WXC_FROM_DIP(5));
+
+    staticTextUnderscore1 = new wxStaticText(
+        panelGeneralSettings, wxID_ANY, _("_"), wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1, -1)), 0);
+
+    sizerName->Add(staticTextUnderscore1, 0, wxBOTTOM | wxALIGN_BOTTOM, WXC_FROM_DIP(5));
+
+    textCtrlDate = new wxTextCtrl(panelGeneralSettings, wxID_ANY, wxT("*Current Date*"), wxDefaultPosition,
+        wxDLG_UNIT(panelGeneralSettings, wxSize(-1, -1)), wxTE_READONLY | wxTE_NO_VSCROLL | wxTE_CENTRE);
+#if wxVERSION_NUMBER >= 3000
     textCtrlDate->SetHint(wxT(""));
-    #endif
-    
+#endif
+
     sizerName->Add(textCtrlDate, 0, wxALL, WXC_FROM_DIP(5));
-    
-    staticTextUnderscore2 = new wxStaticText(panelGeneralSettings, wxID_ANY, _("_"), wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1,-1)), 0);
-    
-    sizerName->Add(staticTextUnderscore2, 0, wxBOTTOM|wxALIGN_BOTTOM, WXC_FROM_DIP(5));
-    
-    textCtrlTime = new wxTextCtrl(panelGeneralSettings, wxID_ANY, wxT("*Current Time*"), wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1,-1)), wxTE_READONLY|wxTE_NO_VSCROLL|wxTE_CENTRE);
-    #if wxVERSION_NUMBER >= 3000
+
+    staticTextUnderscore2 = new wxStaticText(
+        panelGeneralSettings, wxID_ANY, _("_"), wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1, -1)), 0);
+
+    sizerName->Add(staticTextUnderscore2, 0, wxBOTTOM | wxALIGN_BOTTOM, WXC_FROM_DIP(5));
+
+    textCtrlTime = new wxTextCtrl(panelGeneralSettings, wxID_ANY, wxT("*Current Time*"), wxDefaultPosition,
+        wxDLG_UNIT(panelGeneralSettings, wxSize(-1, -1)), wxTE_READONLY | wxTE_NO_VSCROLL | wxTE_CENTRE);
+#if wxVERSION_NUMBER >= 3000
     textCtrlTime->SetHint(wxT(""));
-    #endif
-    
+#endif
+
     sizerName->Add(textCtrlTime, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     wxBoxSizer* sizerCompressionUpdate = new wxBoxSizer(wxHORIZONTAL);
-    
+
     sizerGeneralSettings->Add(sizerCompressionUpdate, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxStaticBoxSizer* sizerCompressionLevel = new wxStaticBoxSizer( new wxStaticBox(panelGeneralSettings, wxID_ANY, _("Compression Level")), wxVERTICAL);
-    
+
+    wxStaticBoxSizer* sizerCompressionLevel =
+        new wxStaticBoxSizer(new wxStaticBox(panelGeneralSettings, wxID_ANY, _("Compression Level")), wxVERTICAL);
+
     sizerCompressionUpdate->Add(sizerCompressionLevel, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceCompressionLevelArr;
-    choiceCompressionLevelArr.Add(wxT("Copy"));
-    choiceCompressionLevelArr.Add(wxT("Fastest"));
-    choiceCompressionLevelArr.Add(wxT("Fast"));
-    choiceCompressionLevelArr.Add(wxT("Normal"));
-    choiceCompressionLevelArr.Add(wxT("High"));
-    choiceCompressionLevelArr.Add(wxT("Max"));
-    choiceCompressionLevel = new wxChoice(panelGeneralSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1,-1)), choiceCompressionLevelArr, 0);
+    choiceCompressionLevelArr.Add(_("Copy"));
+    choiceCompressionLevelArr.Add(_("Fastest"));
+    choiceCompressionLevelArr.Add(_("Fast"));
+    choiceCompressionLevelArr.Add(_("Normal"));
+    choiceCompressionLevelArr.Add(_("High"));
+    choiceCompressionLevelArr.Add(_("Max"));
+    choiceCompressionLevel = new wxChoice(panelGeneralSettings, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelGeneralSettings, wxSize(-1, -1)), choiceCompressionLevelArr, 0);
     choiceCompressionLevel->SetSelection(3);
-    
-    sizerCompressionLevel->Add(choiceCompressionLevel, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    sizerCompressionUpdate->Add(0, 0, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxStaticBoxSizer* sizerUpdateMode = new wxStaticBoxSizer( new wxStaticBox(panelGeneralSettings, wxID_ANY, _("Update Mode")), wxVERTICAL);
-    
+
+    sizerCompressionLevel->Add(choiceCompressionLevel, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    sizerCompressionUpdate->Add(0, 0, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    wxStaticBoxSizer* sizerUpdateMode =
+        new wxStaticBoxSizer(new wxStaticBox(panelGeneralSettings, wxID_ANY, _("Update Mode")), wxVERTICAL);
+
     sizerCompressionUpdate->Add(sizerUpdateMode, 1, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceUpdateModeArr;
-    choiceUpdateModeArr.Add(wxT("None"));
-    choiceUpdateModeArr.Add(wxT("Append"));
-    choiceUpdateModeArr.Add(wxT("Overwrite"));
-    choiceUpdateMode = new wxChoice(panelGeneralSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelGeneralSettings, wxSize(-1,-1)), choiceUpdateModeArr, 0);
+    choiceUpdateModeArr.Add(_("None"));
+    choiceUpdateModeArr.Add(_("Append"));
+    choiceUpdateModeArr.Add(_("Overwrite"));
+    choiceUpdateMode = new wxChoice(panelGeneralSettings, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelGeneralSettings, wxSize(-1, -1)), choiceUpdateModeArr, 0);
     choiceUpdateMode->SetSelection(2);
-    
-    sizerUpdateMode->Add(choiceUpdateMode, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    choiceUpdateMode->SetMinSize(wxSize(100,-1));
-    
-    panelAdvancedSettings = new wxPanel(notebookArchiveSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(notebookArchiveSettings, wxSize(-1,-1)), wxTAB_TRAVERSAL);
+
+    sizerUpdateMode->Add(choiceUpdateMode, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    choiceUpdateMode->SetMinSize(wxSize(100, -1));
+
+    panelAdvancedSettings = new wxPanel(notebookArchiveSettings, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(notebookArchiveSettings, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     notebookArchiveSettings->AddPage(panelAdvancedSettings, _("Advanced"), false);
-    
+
     wxBoxSizer* sizerAdvancedSettings = new wxBoxSizer(wxVERTICAL);
     panelAdvancedSettings->SetSizer(sizerAdvancedSettings);
-    
+
     wxBoxSizer* sizerFormatCompressionDictionary = new wxBoxSizer(wxHORIZONTAL);
-    
-    sizerAdvancedSettings->Add(sizerFormatCompressionDictionary, 0, wxTOP|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    sizerAdvancedSettings->Add(sizerFormatCompressionDictionary, 0, wxTOP | wxEXPAND, WXC_FROM_DIP(5));
+
     wxArrayString radioBoxFormatArr;
     radioBoxFormatArr.Add(_("*.7z"));
     radioBoxFormatArr.Add(_("*.zip"));
-    radioBoxFormat = new wxRadioBox(panelAdvancedSettings, wxID_ANY, _("Format"), wxDefaultPosition, wxDLG_UNIT(panelAdvancedSettings, wxSize(-1,-1)), radioBoxFormatArr, 1, wxRA_SPECIFY_ROWS);
+    radioBoxFormat = new wxRadioBox(panelAdvancedSettings, wxID_ANY, _("Format"), wxDefaultPosition,
+        wxDLG_UNIT(panelAdvancedSettings, wxSize(-1, -1)), radioBoxFormatArr, 1, wxRA_SPECIFY_ROWS);
     radioBoxFormat->SetSelection(0);
-    
-    sizerFormatCompressionDictionary->Add(radioBoxFormat, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxStaticBoxSizer* sizerCompressionMethod = new wxStaticBoxSizer( new wxStaticBox(panelAdvancedSettings, wxID_ANY, _("Compression Method")), wxHORIZONTAL);
-    
+
+    sizerFormatCompressionDictionary->Add(radioBoxFormat, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    wxStaticBoxSizer* sizerCompressionMethod =
+        new wxStaticBoxSizer(new wxStaticBox(panelAdvancedSettings, wxID_ANY, _("Compression Method")), wxHORIZONTAL);
+
     sizerFormatCompressionDictionary->Add(sizerCompressionMethod, 1, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceCompressionMethodArr;
-    choiceCompressionMethodArr.Add(wxT("BZip2"));
-    choiceCompressionMethodArr.Add(wxT("LZMA"));
-    choiceCompressionMethodArr.Add(wxT("LZMA2"));
-    choiceCompressionMethodArr.Add(wxT("PPMd"));
-    choiceCompressionMethod = new wxChoice(panelAdvancedSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelAdvancedSettings, wxSize(-1,-1)), choiceCompressionMethodArr, 0);
+    choiceCompressionMethodArr.Add(_("BZip2"));
+    choiceCompressionMethodArr.Add(_("LZMA"));
+    choiceCompressionMethodArr.Add(_("LZMA2"));
+    choiceCompressionMethodArr.Add(_("PPMd"));
+    choiceCompressionMethod = new wxChoice(panelAdvancedSettings, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelAdvancedSettings, wxSize(-1, -1)), choiceCompressionMethodArr, 0);
     choiceCompressionMethod->SetSelection(2);
-    
-    sizerCompressionMethod->Add(choiceCompressionMethod, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    choiceCompressionMethod->SetMinSize(wxSize(100,-1));
-    
-    wxStaticBoxSizer* sizerDictionarySize = new wxStaticBoxSizer( new wxStaticBox(panelAdvancedSettings, wxID_ANY, _("Dictionary Size")), wxVERTICAL);
-    
+
+    sizerCompressionMethod->Add(choiceCompressionMethod, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    choiceCompressionMethod->SetMinSize(wxSize(100, -1));
+
+    wxStaticBoxSizer* sizerDictionarySize =
+        new wxStaticBoxSizer(new wxStaticBox(panelAdvancedSettings, wxID_ANY, _("Dictionary Size")), wxVERTICAL);
+
     sizerFormatCompressionDictionary->Add(sizerDictionarySize, 1, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceDictionarySizeArr;
-    choiceDictionarySizeArr.Add(wxT("64 KB"));
-    choiceDictionarySizeArr.Add(wxT("256 KB"));
-    choiceDictionarySizeArr.Add(wxT("1 MB"));
-    choiceDictionarySizeArr.Add(wxT("2 MB"));
-    choiceDictionarySizeArr.Add(wxT("4 MB"));
-    choiceDictionarySizeArr.Add(wxT("8 MB"));
-    choiceDictionarySizeArr.Add(wxT("16 MB"));
-    choiceDictionarySizeArr.Add(wxT("32 MB"));
-    choiceDictionarySizeArr.Add(wxT("64 MB"));
-    choiceDictionarySizeArr.Add(wxT("128 MB"));
-    choiceDictionarySizeArr.Add(wxT("256 MB"));
-    choiceDictionarySizeArr.Add(wxT("512 MB"));
-    choiceDictionarySizeArr.Add(wxT("1024 MB"));
-    choiceDictionarySize = new wxChoice(panelAdvancedSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelAdvancedSettings, wxSize(-1,-1)), choiceDictionarySizeArr, 0);
+    choiceDictionarySizeArr.Add(_("64 KB"));
+    choiceDictionarySizeArr.Add(_("256 KB"));
+    choiceDictionarySizeArr.Add(_("1 MB"));
+    choiceDictionarySizeArr.Add(_("2 MB"));
+    choiceDictionarySizeArr.Add(_("4 MB"));
+    choiceDictionarySizeArr.Add(_("8 MB"));
+    choiceDictionarySizeArr.Add(_("16 MB"));
+    choiceDictionarySizeArr.Add(_("32 MB"));
+    choiceDictionarySizeArr.Add(_("64 MB"));
+    choiceDictionarySizeArr.Add(_("128 MB"));
+    choiceDictionarySizeArr.Add(_("256 MB"));
+    choiceDictionarySizeArr.Add(_("512 MB"));
+    choiceDictionarySizeArr.Add(_("1024 MB"));
+    choiceDictionarySize = new wxChoice(panelAdvancedSettings, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelAdvancedSettings, wxSize(-1, -1)), choiceDictionarySizeArr, 0);
     choiceDictionarySize->SetSelection(6);
-    
-    sizerDictionarySize->Add(choiceDictionarySize, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    sizerDictionarySize->Add(choiceDictionarySize, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
     wxBoxSizer* sizerThreadVolumeSolid = new wxBoxSizer(wxHORIZONTAL);
-    
+
     sizerAdvancedSettings->Add(sizerThreadVolumeSolid, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxStaticBoxSizer* sizerThreadCount = new wxStaticBoxSizer( new wxStaticBox(panelAdvancedSettings, wxID_ANY, _("Thread Count")), wxVERTICAL);
-    
+
+    wxStaticBoxSizer* sizerThreadCount =
+        new wxStaticBoxSizer(new wxStaticBox(panelAdvancedSettings, wxID_ANY, _("Thread Count")), wxVERTICAL);
+
     sizerThreadVolumeSolid->Add(sizerThreadCount, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceThreadCountArr;
-    choiceThreadCount = new wxChoice(panelAdvancedSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelAdvancedSettings, wxSize(-1,-1)), choiceThreadCountArr, 0);
-    
-    sizerThreadCount->Add(choiceThreadCount, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    wxStaticBoxSizer* sizerVolumeSize = new wxStaticBoxSizer( new wxStaticBox(panelAdvancedSettings, wxID_ANY, _("Volume Size")), wxHORIZONTAL);
-    
+    choiceThreadCount = new wxChoice(panelAdvancedSettings, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelAdvancedSettings, wxSize(-1, -1)), choiceThreadCountArr, 0);
+
+    sizerThreadCount->Add(choiceThreadCount, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    wxStaticBoxSizer* sizerVolumeSize =
+        new wxStaticBoxSizer(new wxStaticBox(panelAdvancedSettings, wxID_ANY, _("Volume Size")), wxHORIZONTAL);
+
     sizerThreadVolumeSolid->Add(sizerVolumeSize, 0, wxALL, WXC_FROM_DIP(5));
-    
-    textCtrlVolumeSize = new wxTextCtrl(panelAdvancedSettings, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(panelAdvancedSettings, wxSize(-1,-1)), wxTE_RIGHT);
-    #if wxVERSION_NUMBER >= 3000
+
+    textCtrlVolumeSize = new wxTextCtrl(panelAdvancedSettings, wxID_ANY, wxT(""), wxDefaultPosition,
+        wxDLG_UNIT(panelAdvancedSettings, wxSize(-1, -1)), wxTE_RIGHT);
+#if wxVERSION_NUMBER >= 3000
     textCtrlVolumeSize->SetHint(wxT(""));
-    #endif
-    
+#endif
+
     sizerVolumeSize->Add(textCtrlVolumeSize, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     wxArrayString choiceVolumeSizeUnitArr;
-    choiceVolumeSizeUnitArr.Add(wxT("B"));
-    choiceVolumeSizeUnitArr.Add(wxT("KB"));
-    choiceVolumeSizeUnitArr.Add(wxT("MB"));
-    choiceVolumeSizeUnitArr.Add(wxT("GB"));
-    choiceVolumeSizeUnit = new wxChoice(panelAdvancedSettings, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(panelAdvancedSettings, wxSize(-1,-1)), choiceVolumeSizeUnitArr, 0);
+    choiceVolumeSizeUnitArr.Add(_("B"));
+    choiceVolumeSizeUnitArr.Add(_("KB"));
+    choiceVolumeSizeUnitArr.Add(_("MB"));
+    choiceVolumeSizeUnitArr.Add(_("GB"));
+    choiceVolumeSizeUnit = new wxChoice(panelAdvancedSettings, wxID_ANY, wxDefaultPosition,
+        wxDLG_UNIT(panelAdvancedSettings, wxSize(-1, -1)), choiceVolumeSizeUnitArr, 0);
     choiceVolumeSizeUnit->SetSelection(2);
-    
+
     sizerVolumeSize->Add(choiceVolumeSizeUnit, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     wxBoxSizer* sizerSolidMode = new wxBoxSizer(wxVERTICAL);
-    
+
     sizerThreadVolumeSolid->Add(sizerSolidMode, 1, wxALIGN_CENTER_VERTICAL, WXC_FROM_DIP(5));
-    
-    checkBoxSolidMode = new wxCheckBox(panelAdvancedSettings, wxID_ANY, _("Solid Mode"), wxDefaultPosition, wxDLG_UNIT(panelAdvancedSettings, wxSize(-1,-1)), 0);
+
+    checkBoxSolidMode = new wxCheckBox(panelAdvancedSettings, wxID_ANY, _("Solid Mode"), wxDefaultPosition,
+        wxDLG_UNIT(panelAdvancedSettings, wxSize(-1, -1)), 0);
     checkBoxSolidMode->SetValue(false);
-    
-    sizerSolidMode->Add(checkBoxSolidMode, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    sizerSolidMode->Add(checkBoxSolidMode, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
     wxBoxSizer* sizerButtons = new wxBoxSizer(wxHORIZONTAL);
-    
+
     sizerArchiveOptions->Add(sizerButtons, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    sizerButtons->Add(0, 0, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    buttonGo = new wxButton(this, wxID_ANY, _("Go"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
-    
+
+    sizerButtons->Add(0, 0, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    buttonGo = new wxButton(this, wxID_ANY, _("Go"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
     sizerButtons->Add(buttonGo, 0, wxALL, WXC_FROM_DIP(5));
-    
-    buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
-    
+
+    buttonCancel = new wxButton(this, wxID_ANY, _("Cancel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
     sizerButtons->Add(buttonCancel, 0, wxALL, WXC_FROM_DIP(5));
-    
+
     SetName(wxT("ManualBackupDialogBase"));
-    SetSize(wxDLG_UNIT(this, wxSize(-1,-1)));
-    if (GetSizer()) {
-         GetSizer()->Fit(this);
+    SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
+    if(GetSizer()) {
+        GetSizer()->Fit(this);
     }
     if(GetParent()) {
         CentreOnParent(wxBOTH);
@@ -718,80 +810,87 @@ ManualBackupDialogBase::ManualBackupDialogBase(wxWindow* parent, wxWindowID id, 
         CentreOnScreen(wxBOTH);
     }
     // Connect events
-    this->Connect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(ManualBackupDialogBase::OnCloseWindow), NULL, this);
-    radioBoxFormat->Connect(wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(ManualBackupDialogBase::OnFormatRadioBoxSelected), NULL, this);
-    choiceCompressionMethod->Connect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(ManualBackupDialogBase::OnCompressionMethodChoiceSelected), NULL, this);
-    buttonGo->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ManualBackupDialogBase::OnGoButtonClicked), NULL, this);
-    buttonCancel->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ManualBackupDialogBase::OnCancelButtonClicked), NULL, this);
-    
+    this->Bind(wxEVT_CLOSE_WINDOW, &ManualBackupDialogBase::OnCloseWindow, this);
+    radioBoxFormat->Bind(wxEVT_COMMAND_RADIOBOX_SELECTED, &ManualBackupDialogBase::OnFormatRadioBoxSelected, this);
+    choiceCompressionMethod->Bind(
+        wxEVT_COMMAND_CHOICE_SELECTED, &ManualBackupDialogBase::OnCompressionMethodChoiceSelected, this);
+    buttonGo->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ManualBackupDialogBase::OnGoButtonClicked, this);
+    buttonCancel->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &ManualBackupDialogBase::OnCancelButtonClicked, this);
 }
 
 ManualBackupDialogBase::~ManualBackupDialogBase()
 {
-    this->Disconnect(wxEVT_CLOSE_WINDOW, wxCloseEventHandler(ManualBackupDialogBase::OnCloseWindow), NULL, this);
-    radioBoxFormat->Disconnect(wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(ManualBackupDialogBase::OnFormatRadioBoxSelected), NULL, this);
-    choiceCompressionMethod->Disconnect(wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(ManualBackupDialogBase::OnCompressionMethodChoiceSelected), NULL, this);
-    buttonGo->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ManualBackupDialogBase::OnGoButtonClicked), NULL, this);
-    buttonCancel->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ManualBackupDialogBase::OnCancelButtonClicked), NULL, this);
-    
+    this->Unbind(wxEVT_CLOSE_WINDOW, &ManualBackupDialogBase::OnCloseWindow, this);
+    radioBoxFormat->Unbind(wxEVT_COMMAND_RADIOBOX_SELECTED, &ManualBackupDialogBase::OnFormatRadioBoxSelected, this);
+    choiceCompressionMethod->Unbind(
+        wxEVT_COMMAND_CHOICE_SELECTED, &ManualBackupDialogBase::OnCompressionMethodChoiceSelected, this);
+    buttonGo->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ManualBackupDialogBase::OnGoButtonClicked, this);
+    buttonCancel->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &ManualBackupDialogBase::OnCancelButtonClicked, this);
 }
 
-MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+MainFrameBase::MainFrameBase(wxWindow* parent,
+    wxWindowID id,
+    const wxString& title,
+    const wxPoint& pos,
+    const wxSize& size,
+    long style)
     : wxFrame(parent, id, title, pos, size, style)
 {
-    if ( !bBitmapLoaded ) {
+    if(!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
         wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
         wxCEEDFInitBitmapResources();
         bBitmapLoaded = true;
     }
-    
+
     wxBoxSizer* sizerMain = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(sizerMain);
-    
+
     wxBoxSizer* sizerMainList = new wxBoxSizer(wxVERTICAL);
-    
+
     sizerMain->Add(sizerMainList, 1, wxEXPAND, WXC_FROM_DIP(5));
-    
-    mainList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), wxLC_REPORT);
-    
-    sizerMainList->Add(mainList, 1, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    mainList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT);
+
+    sizerMainList->Add(mainList, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
     mainList->InsertColumn(mainList->GetColumnCount(), _("Name"), wxLIST_FORMAT_LEFT, -1);
     mainList->InsertColumn(mainList->GetColumnCount(), _("Size"), wxLIST_FORMAT_LEFT, -1);
     mainList->InsertColumn(mainList->GetColumnCount(), _("Path"), wxLIST_FORMAT_LEFT, -2);
     wxGridSizer* sizerButtons = new wxGridSizer(1, 6, 0, 0);
-    
+
     sizerMain->Add(sizerButtons, 0, wxEXPAND, WXC_FROM_DIP(5));
-    
-    buttonArchive = new wxButton(this, wxID_ANY, _("Archive"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
-    
-    sizerButtons->Add(buttonArchive, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    buttonAddDirectory = new wxButton(this, wxID_ANY, _("Add Folder"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
-    
-    sizerButtons->Add(buttonAddDirectory, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    buttonAddFile = new wxButton(this, wxID_ANY, _("Add File"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
-    
-    sizerButtons->Add(buttonAddFile, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
-    buttonRemove = new wxButton(this, wxID_ANY, _("Remove"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
+
+    buttonArchive = new wxButton(this, wxID_ANY, _("Archive"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    sizerButtons->Add(buttonArchive, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    buttonAddDirectory =
+        new wxButton(this, wxID_ANY, _("Add Folder"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    sizerButtons->Add(buttonAddDirectory, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    buttonAddFile = new wxButton(this, wxID_ANY, _("Add File"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    sizerButtons->Add(buttonAddFile, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    buttonRemove = new wxButton(this, wxID_ANY, _("Remove"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     buttonRemove->Enable(false);
-    
-    sizerButtons->Add(buttonRemove, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    sizerButtons->Add(buttonRemove, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
     sizerButtons->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
-    
-    buttonSettings = new wxButton(this, wxID_ANY, _("Settings"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1,-1)), 0);
-    
-    sizerButtons->Add(buttonSettings, 0, wxALL|wxEXPAND, WXC_FROM_DIP(5));
-    
+
+    buttonSettings =
+        new wxButton(this, wxID_ANY, _("Settings"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    sizerButtons->Add(buttonSettings, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
     SetName(wxT("MainFrameBase"));
-    SetMinClientSize(wxSize(640,360));
-    SetSize(wxDLG_UNIT(this, wxSize(640,360)));
-    if (GetSizer()) {
-         GetSizer()->Fit(this);
+    SetMinClientSize(wxSize(640, 360));
+    SetSize(wxDLG_UNIT(this, wxSize(640, 360)));
+    if(GetSizer()) {
+        GetSizer()->Fit(this);
     }
     if(GetParent()) {
         CentreOnParent(wxBOTH);
@@ -799,24 +898,22 @@ MainFrameBase::MainFrameBase(wxWindow* parent, wxWindowID id, const wxString& ti
         CentreOnScreen(wxBOTH);
     }
     // Connect events
-    mainList->Connect(wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler(MainFrameBase::OnMainListItemSelected), NULL, this);
-    mainList->Connect(wxEVT_COMMAND_LIST_ITEM_DESELECTED, wxListEventHandler(MainFrameBase::OnMainListItemDeselected), NULL, this);
-    buttonArchive->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MainFrameBase::OnArchiveButtonClicked), NULL, this);
-    buttonAddDirectory->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MainFrameBase::OnAddDirectoryButtonClicked), NULL, this);
-    buttonAddFile->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MainFrameBase::OnAddFileButtonClicked), NULL, this);
-    buttonRemove->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MainFrameBase::OnRemoveButtonClicked), NULL, this);
-    buttonSettings->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MainFrameBase::OnSettingsButtonClicked), NULL, this);
-    
+    mainList->Bind(wxEVT_COMMAND_LIST_ITEM_SELECTED, &MainFrameBase::OnMainListItemSelected, this);
+    mainList->Bind(wxEVT_COMMAND_LIST_ITEM_DESELECTED, &MainFrameBase::OnMainListItemDeselected, this);
+    buttonArchive->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MainFrameBase::OnArchiveButtonClicked, this);
+    buttonAddDirectory->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MainFrameBase::OnAddDirectoryButtonClicked, this);
+    buttonAddFile->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MainFrameBase::OnAddFileButtonClicked, this);
+    buttonRemove->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MainFrameBase::OnRemoveButtonClicked, this);
+    buttonSettings->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MainFrameBase::OnSettingsButtonClicked, this);
 }
 
 MainFrameBase::~MainFrameBase()
 {
-    mainList->Disconnect(wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler(MainFrameBase::OnMainListItemSelected), NULL, this);
-    mainList->Disconnect(wxEVT_COMMAND_LIST_ITEM_DESELECTED, wxListEventHandler(MainFrameBase::OnMainListItemDeselected), NULL, this);
-    buttonArchive->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MainFrameBase::OnArchiveButtonClicked), NULL, this);
-    buttonAddDirectory->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MainFrameBase::OnAddDirectoryButtonClicked), NULL, this);
-    buttonAddFile->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MainFrameBase::OnAddFileButtonClicked), NULL, this);
-    buttonRemove->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MainFrameBase::OnRemoveButtonClicked), NULL, this);
-    buttonSettings->Disconnect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MainFrameBase::OnSettingsButtonClicked), NULL, this);
-    
+    mainList->Unbind(wxEVT_COMMAND_LIST_ITEM_SELECTED, &MainFrameBase::OnMainListItemSelected, this);
+    mainList->Unbind(wxEVT_COMMAND_LIST_ITEM_DESELECTED, &MainFrameBase::OnMainListItemDeselected, this);
+    buttonArchive->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &MainFrameBase::OnArchiveButtonClicked, this);
+    buttonAddDirectory->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &MainFrameBase::OnAddDirectoryButtonClicked, this);
+    buttonAddFile->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &MainFrameBase::OnAddFileButtonClicked, this);
+    buttonRemove->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &MainFrameBase::OnRemoveButtonClicked, this);
+    buttonSettings->Unbind(wxEVT_COMMAND_BUTTON_CLICKED, &MainFrameBase::OnSettingsButtonClicked, this);
 }

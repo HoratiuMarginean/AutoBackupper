@@ -7,6 +7,7 @@
 #ifndef _AUTOBACKUPPERGUI_WXCRAFTER_AUTOBACKUPPER_BASE_CLASSES_H
 #define _AUTOBACKUPPERGUI_WXCRAFTER_AUTOBACKUPPER_BASE_CLASSES_H
 
+// clang-format off
 #include <wx/settings.h>
 #include <wx/xrc/xmlres.h>
 #include <wx/xrc/xh_bmp.h>
@@ -49,6 +50,7 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
+// clang-format on
 
 class NewTriggerDialogBase : public wxDialog
 {
@@ -65,27 +67,76 @@ protected:
     wxButton* buttonCancel;
 
 protected:
-    virtual void OnCloseWindow(wxCloseEvent& event) { event.Skip(); }
-    virtual void OnFrequencyRadioboxSelected(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnDaysCheckListBoxToggled(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnAddButtonClicked(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnCancelButtonClicked(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCloseWindow(wxCloseEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnFrequencyRadioboxSelected(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnDaysCheckListBoxToggled(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnAddButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnCancelButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
 
 public:
-    wxRadioBox* GetRadioBoxFrequency() { return radioBoxFrequency; }
-    wxDatePickerCtrl* GetDatePickerStart() { return datePickerStart; }
-    wxTimePickerCtrl* GetTimePickerStart() { return timePickerStart; }
-    wxStaticText* GetStaticTextRecurrence() { return staticTextRecurrence; }
-    wxSpinCtrl* GetSpinCtrlRecurrence() { return spinCtrlRecurrence; }
-    wxStaticText* GetStaticTextRecurrenceUnit() { return staticTextRecurrenceUnit; }
-    wxCheckListBox* GetCheckListBoxDays() { return checkListBoxDays; }
-    wxPanel* GetPanelRecurrenceDays() { return panelRecurrenceDays; }
-    wxButton* GetButtonAdd() { return buttonAdd; }
-    wxButton* GetButtonCancel() { return buttonCancel; }
-    NewTriggerDialogBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Add a new trigger"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP);
+    wxRadioBox* GetRadioBoxFrequency()
+    {
+        return radioBoxFrequency;
+    }
+    wxDatePickerCtrl* GetDatePickerStart()
+    {
+        return datePickerStart;
+    }
+    wxTimePickerCtrl* GetTimePickerStart()
+    {
+        return timePickerStart;
+    }
+    wxStaticText* GetStaticTextRecurrence()
+    {
+        return staticTextRecurrence;
+    }
+    wxSpinCtrl* GetSpinCtrlRecurrence()
+    {
+        return spinCtrlRecurrence;
+    }
+    wxStaticText* GetStaticTextRecurrenceUnit()
+    {
+        return staticTextRecurrenceUnit;
+    }
+    wxCheckListBox* GetCheckListBoxDays()
+    {
+        return checkListBoxDays;
+    }
+    wxPanel* GetPanelRecurrenceDays()
+    {
+        return panelRecurrenceDays;
+    }
+    wxButton* GetButtonAdd()
+    {
+        return buttonAdd;
+    }
+    wxButton* GetButtonCancel()
+    {
+        return buttonCancel;
+    }
+    NewTriggerDialogBase(wxWindow* parent,
+        wxWindowID id = wxID_ANY,
+        const wxString& title = _("Add a new trigger"),
+        const wxPoint& pos = wxDefaultPosition,
+        const wxSize& size = wxSize(-1, -1),
+        long style = wxDEFAULT_DIALOG_STYLE | wxSTAY_ON_TOP);
     virtual ~NewTriggerDialogBase();
 };
-
 
 class SettingsFrameBase : public wxFrame
 {
@@ -121,59 +172,204 @@ protected:
     wxButton* buttonCancel;
 
 protected:
-    virtual void OnCloseWindow(wxCloseEvent& event) { event.Skip(); }
-    virtual void OnDestinationPathDirPickerChanged(wxFileDirPickerEvent& event) { event.Skip(); }
-    virtual void OnArchiveNameTextUpdated(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnCompressionLevelChoiceSelected(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnUpdateModeChoiceSelected(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnFormatRadioBoxSelected(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnCompressionMethodChoiceSelected(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnDictionarySizeChoiceSelected(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnThreadCountChoiceSelected(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnVolumeSizeTextUpdated(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnVolumeSizeUnitChoiceSelected(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnSolidModeCheckboxClicked(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnTriggerListItemSelected(wxListEvent& event) { event.Skip(); }
-    virtual void OnTriggerListItemDeselected(wxListEvent& event) { event.Skip(); }
-    virtual void OnNewButtonClicked(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnRemoveButtonClicked(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnSaveButtonClicked(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnCancelButtonClicked(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCloseWindow(wxCloseEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnDestinationPathDirPickerChanged(wxFileDirPickerEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnArchiveNameTextUpdated(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnCompressionLevelChoiceSelected(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnUpdateModeChoiceSelected(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnFormatRadioBoxSelected(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnCompressionMethodChoiceSelected(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnDictionarySizeChoiceSelected(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnThreadCountChoiceSelected(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnVolumeSizeTextUpdated(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnVolumeSizeUnitChoiceSelected(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnSolidModeCheckboxClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnTriggerListItemSelected(wxListEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnTriggerListItemDeselected(wxListEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnNewButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnRemoveButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnSaveButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnCancelButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
 
 public:
-    wxStaticText* GetStaticTextDestinationPath() { return staticTextDestinationPath; }
-    wxDirPickerCtrl* GetDirPickerDestinationPath() { return dirPickerDestinationPath; }
-    wxStaticText* GetStaticTextArchiveName() { return staticTextArchiveName; }
-    wxTextCtrl* GetTextCtrlArchiveName() { return textCtrlArchiveName; }
-    wxStaticText* GetStaticTextUnderscore1() { return staticTextUnderscore1; }
-    wxTextCtrl* GetTextCtrlDate() { return textCtrlDate; }
-    wxStaticText* GetStaticTextUnderscore2() { return staticTextUnderscore2; }
-    wxTextCtrl* GetTextCtrlTime() { return textCtrlTime; }
-    wxChoice* GetChoiceCompressionLevel() { return choiceCompressionLevel; }
-    wxChoice* GetChoiceUpdateMode() { return choiceUpdateMode; }
-    wxPanel* GetPanelGeneral() { return panelGeneral; }
-    wxRadioBox* GetRadioBoxFormat() { return radioBoxFormat; }
-    wxChoice* GetChoiceCompressionMethod() { return choiceCompressionMethod; }
-    wxChoice* GetChoiceDictionarySize() { return choiceDictionarySize; }
-    wxChoice* GetChoiceThreadCount() { return choiceThreadCount; }
-    wxTextCtrl* GetTextCtrlVolumeSize() { return textCtrlVolumeSize; }
-    wxChoice* GetChoiceVolumeSizeUnit() { return choiceVolumeSizeUnit; }
-    wxCheckBox* GetCheckBoxSolidMode() { return checkBoxSolidMode; }
-    wxPanel* GetPanelAdvanced() { return panelAdvanced; }
-    wxNotebook* GetNotebookArchiveSettings() { return notebookArchiveSettings; }
-    wxPanel* GetPanelArchive() { return panelArchive; }
-    wxStaticText* GetStaticTextTriggerList() { return staticTextTriggerList; }
-    wxListCtrl* GetTriggerList() { return triggerList; }
-    wxButton* GetButtonNew() { return buttonNew; }
-    wxButton* GetButtonRemove() { return buttonRemove; }
-    wxPanel* GetPanelSchedule() { return panelSchedule; }
-    wxNotebook* GetNotebookSettings() { return notebookSettings; }
-    wxButton* GetButtonSave() { return buttonSave; }
-    wxButton* GetButtonCancel() { return buttonCancel; }
-    SettingsFrameBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Settings"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxCAPTION|wxMINIMIZE_BOX|wxCLOSE_BOX);
+    wxStaticText* GetStaticTextDestinationPath()
+    {
+        return staticTextDestinationPath;
+    }
+    wxDirPickerCtrl* GetDirPickerDestinationPath()
+    {
+        return dirPickerDestinationPath;
+    }
+    wxStaticText* GetStaticTextArchiveName()
+    {
+        return staticTextArchiveName;
+    }
+    wxTextCtrl* GetTextCtrlArchiveName()
+    {
+        return textCtrlArchiveName;
+    }
+    wxStaticText* GetStaticTextUnderscore1()
+    {
+        return staticTextUnderscore1;
+    }
+    wxTextCtrl* GetTextCtrlDate()
+    {
+        return textCtrlDate;
+    }
+    wxStaticText* GetStaticTextUnderscore2()
+    {
+        return staticTextUnderscore2;
+    }
+    wxTextCtrl* GetTextCtrlTime()
+    {
+        return textCtrlTime;
+    }
+    wxChoice* GetChoiceCompressionLevel()
+    {
+        return choiceCompressionLevel;
+    }
+    wxChoice* GetChoiceUpdateMode()
+    {
+        return choiceUpdateMode;
+    }
+    wxPanel* GetPanelGeneral()
+    {
+        return panelGeneral;
+    }
+    wxRadioBox* GetRadioBoxFormat()
+    {
+        return radioBoxFormat;
+    }
+    wxChoice* GetChoiceCompressionMethod()
+    {
+        return choiceCompressionMethod;
+    }
+    wxChoice* GetChoiceDictionarySize()
+    {
+        return choiceDictionarySize;
+    }
+    wxChoice* GetChoiceThreadCount()
+    {
+        return choiceThreadCount;
+    }
+    wxTextCtrl* GetTextCtrlVolumeSize()
+    {
+        return textCtrlVolumeSize;
+    }
+    wxChoice* GetChoiceVolumeSizeUnit()
+    {
+        return choiceVolumeSizeUnit;
+    }
+    wxCheckBox* GetCheckBoxSolidMode()
+    {
+        return checkBoxSolidMode;
+    }
+    wxPanel* GetPanelAdvanced()
+    {
+        return panelAdvanced;
+    }
+    wxNotebook* GetNotebookArchiveSettings()
+    {
+        return notebookArchiveSettings;
+    }
+    wxPanel* GetPanelArchive()
+    {
+        return panelArchive;
+    }
+    wxStaticText* GetStaticTextTriggerList()
+    {
+        return staticTextTriggerList;
+    }
+    wxListCtrl* GetTriggerList()
+    {
+        return triggerList;
+    }
+    wxButton* GetButtonNew()
+    {
+        return buttonNew;
+    }
+    wxButton* GetButtonRemove()
+    {
+        return buttonRemove;
+    }
+    wxPanel* GetPanelSchedule()
+    {
+        return panelSchedule;
+    }
+    wxNotebook* GetNotebookSettings()
+    {
+        return notebookSettings;
+    }
+    wxButton* GetButtonSave()
+    {
+        return buttonSave;
+    }
+    wxButton* GetButtonCancel()
+    {
+        return buttonCancel;
+    }
+    SettingsFrameBase(wxWindow* parent,
+        wxWindowID id = wxID_ANY,
+        const wxString& title = _("Settings"),
+        const wxPoint& pos = wxDefaultPosition,
+        const wxSize& size = wxSize(-1, -1),
+        long style = wxCAPTION | wxMINIMIZE_BOX | wxCLOSE_BOX);
     virtual ~SettingsFrameBase();
 };
-
 
 class ManualBackupDialogBase : public wxDialog
 {
@@ -202,39 +398,124 @@ protected:
     wxButton* buttonCancel;
 
 protected:
-    virtual void OnCloseWindow(wxCloseEvent& event) { event.Skip(); }
-    virtual void OnFormatRadioBoxSelected(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnCompressionMethodChoiceSelected(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnGoButtonClicked(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnCancelButtonClicked(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnCloseWindow(wxCloseEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnFormatRadioBoxSelected(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnCompressionMethodChoiceSelected(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnGoButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnCancelButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
 
 public:
-    wxStaticText* GetStaticTextDestinationPath() { return staticTextDestinationPath; }
-    wxDirPickerCtrl* GetDirPickerDestinationPath() { return dirPickerDestinationPath; }
-    wxStaticText* GetStaticTextArchiveName() { return staticTextArchiveName; }
-    wxTextCtrl* GetTextCtrlArchiveName() { return textCtrlArchiveName; }
-    wxStaticText* GetStaticTextUnderscore1() { return staticTextUnderscore1; }
-    wxTextCtrl* GetTextCtrlDate() { return textCtrlDate; }
-    wxStaticText* GetStaticTextUnderscore2() { return staticTextUnderscore2; }
-    wxTextCtrl* GetTextCtrlTime() { return textCtrlTime; }
-    wxChoice* GetChoiceCompressionLevel() { return choiceCompressionLevel; }
-    wxChoice* GetChoiceUpdateMode() { return choiceUpdateMode; }
-    wxPanel* GetPanelGeneralSettings() { return panelGeneralSettings; }
-    wxRadioBox* GetRadioBoxFormat() { return radioBoxFormat; }
-    wxChoice* GetChoiceCompressionMethod() { return choiceCompressionMethod; }
-    wxChoice* GetChoiceDictionarySize() { return choiceDictionarySize; }
-    wxChoice* GetChoiceThreadCount() { return choiceThreadCount; }
-    wxTextCtrl* GetTextCtrlVolumeSize() { return textCtrlVolumeSize; }
-    wxChoice* GetChoiceVolumeSizeUnit() { return choiceVolumeSizeUnit; }
-    wxCheckBox* GetCheckBoxSolidMode() { return checkBoxSolidMode; }
-    wxPanel* GetPanelAdvancedSettings() { return panelAdvancedSettings; }
-    wxNotebook* GetNotebookArchiveSettings() { return notebookArchiveSettings; }
-    wxButton* GetButtonGo() { return buttonGo; }
-    wxButton* GetButtonCancel() { return buttonCancel; }
-    ManualBackupDialogBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Manual Backup"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1,-1), long style = wxDEFAULT_DIALOG_STYLE);
+    wxStaticText* GetStaticTextDestinationPath()
+    {
+        return staticTextDestinationPath;
+    }
+    wxDirPickerCtrl* GetDirPickerDestinationPath()
+    {
+        return dirPickerDestinationPath;
+    }
+    wxStaticText* GetStaticTextArchiveName()
+    {
+        return staticTextArchiveName;
+    }
+    wxTextCtrl* GetTextCtrlArchiveName()
+    {
+        return textCtrlArchiveName;
+    }
+    wxStaticText* GetStaticTextUnderscore1()
+    {
+        return staticTextUnderscore1;
+    }
+    wxTextCtrl* GetTextCtrlDate()
+    {
+        return textCtrlDate;
+    }
+    wxStaticText* GetStaticTextUnderscore2()
+    {
+        return staticTextUnderscore2;
+    }
+    wxTextCtrl* GetTextCtrlTime()
+    {
+        return textCtrlTime;
+    }
+    wxChoice* GetChoiceCompressionLevel()
+    {
+        return choiceCompressionLevel;
+    }
+    wxChoice* GetChoiceUpdateMode()
+    {
+        return choiceUpdateMode;
+    }
+    wxPanel* GetPanelGeneralSettings()
+    {
+        return panelGeneralSettings;
+    }
+    wxRadioBox* GetRadioBoxFormat()
+    {
+        return radioBoxFormat;
+    }
+    wxChoice* GetChoiceCompressionMethod()
+    {
+        return choiceCompressionMethod;
+    }
+    wxChoice* GetChoiceDictionarySize()
+    {
+        return choiceDictionarySize;
+    }
+    wxChoice* GetChoiceThreadCount()
+    {
+        return choiceThreadCount;
+    }
+    wxTextCtrl* GetTextCtrlVolumeSize()
+    {
+        return textCtrlVolumeSize;
+    }
+    wxChoice* GetChoiceVolumeSizeUnit()
+    {
+        return choiceVolumeSizeUnit;
+    }
+    wxCheckBox* GetCheckBoxSolidMode()
+    {
+        return checkBoxSolidMode;
+    }
+    wxPanel* GetPanelAdvancedSettings()
+    {
+        return panelAdvancedSettings;
+    }
+    wxNotebook* GetNotebookArchiveSettings()
+    {
+        return notebookArchiveSettings;
+    }
+    wxButton* GetButtonGo()
+    {
+        return buttonGo;
+    }
+    wxButton* GetButtonCancel()
+    {
+        return buttonCancel;
+    }
+    ManualBackupDialogBase(wxWindow* parent,
+        wxWindowID id = wxID_ANY,
+        const wxString& title = _("Manual Backup"),
+        const wxPoint& pos = wxDefaultPosition,
+        const wxSize& size = wxSize(-1, -1),
+        long style = wxDEFAULT_DIALOG_STYLE);
     virtual ~ManualBackupDialogBase();
 };
-
 
 class MainFrameBase : public wxFrame
 {
@@ -247,22 +528,66 @@ protected:
     wxButton* buttonSettings;
 
 protected:
-    virtual void OnMainListItemSelected(wxListEvent& event) { event.Skip(); }
-    virtual void OnMainListItemDeselected(wxListEvent& event) { event.Skip(); }
-    virtual void OnArchiveButtonClicked(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnAddDirectoryButtonClicked(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnAddFileButtonClicked(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnRemoveButtonClicked(wxCommandEvent& event) { event.Skip(); }
-    virtual void OnSettingsButtonClicked(wxCommandEvent& event) { event.Skip(); }
+    virtual void OnMainListItemSelected(wxListEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnMainListItemDeselected(wxListEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnArchiveButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnAddDirectoryButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnAddFileButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnRemoveButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
+    virtual void OnSettingsButtonClicked(wxCommandEvent& event)
+    {
+        event.Skip();
+    }
 
 public:
-    wxListCtrl* GetMainList() { return mainList; }
-    wxButton* GetButtonArchive() { return buttonArchive; }
-    wxButton* GetButtonAddDirectory() { return buttonAddDirectory; }
-    wxButton* GetButtonAddFile() { return buttonAddFile; }
-    wxButton* GetButtonRemove() { return buttonRemove; }
-    wxButton* GetButtonSettings() { return buttonSettings; }
-    MainFrameBase(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("AutoBackupper"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(640,360), long style = wxCAPTION|wxMINIMIZE_BOX|wxCLOSE_BOX);
+    wxListCtrl* GetMainList()
+    {
+        return mainList;
+    }
+    wxButton* GetButtonArchive()
+    {
+        return buttonArchive;
+    }
+    wxButton* GetButtonAddDirectory()
+    {
+        return buttonAddDirectory;
+    }
+    wxButton* GetButtonAddFile()
+    {
+        return buttonAddFile;
+    }
+    wxButton* GetButtonRemove()
+    {
+        return buttonRemove;
+    }
+    wxButton* GetButtonSettings()
+    {
+        return buttonSettings;
+    }
+    MainFrameBase(wxWindow* parent,
+        wxWindowID id = wxID_ANY,
+        const wxString& title = _("AutoBackupper"),
+        const wxPoint& pos = wxDefaultPosition,
+        const wxSize& size = wxSize(640, 360),
+        long style = wxCAPTION | wxMINIMIZE_BOX | wxCLOSE_BOX);
     virtual ~MainFrameBase();
 };
 

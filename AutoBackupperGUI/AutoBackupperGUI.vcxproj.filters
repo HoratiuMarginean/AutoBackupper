@@ -21,12 +21,6 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wxCrafter\bitmaps.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="wxCrafter\guibase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\common\src\archivehandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,15 +33,15 @@
     <ClCompile Include="..\common\src\settingsfilehandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="wxCrafter\guibase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wxCrafter\bitmaps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\gui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wxCrafter\guibase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\common\include\archivehandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\common\include\utility.h">
@@ -59,13 +53,11 @@
     <ClInclude Include="..\common\include\settingsfilehandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="wxCrafter\AutoBackupper.xrc">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="wxCrafter\bitmaps.xrc">
-      <Filter>Resource Files</Filter>
-    </None>
+    <ClInclude Include="..\common\include\archivehandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wxCrafter\guibase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

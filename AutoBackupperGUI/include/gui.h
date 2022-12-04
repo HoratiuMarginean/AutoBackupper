@@ -17,16 +17,7 @@
 
 
 
-//// Main Application ////
-class MainApp : public wxApp
-{
-public:
-	bool OnInit();
-};
-
-
-
-//// New Trigger Dialog ////
+// New Trigger Dialog
 class NewTriggerDialog : public NewTriggerDialogBase
 {
 public:
@@ -49,7 +40,7 @@ private:
 
 
 
-//// Settings Frame ////
+// Settings Frame
 class SettingsFrame : public SettingsFrameBase
 {
 public:
@@ -81,7 +72,7 @@ protected:
 	void OnCancelButtonClicked(wxCommandEvent& event);
 
 private:
-	//Archive
+	// Archive
 	void updateChoiceCompressionMethod(std::wstring archiveFormat);
 	void updateChoiceDictionarySize(std::wstring archiveFormat, std::wstring compressionMethod);
 	void updateChoiceThreadCount(std::wstring archiveFormat, std::wstring compressionMethod);
@@ -89,7 +80,7 @@ private:
 	void initArchiveSettings();
 	void saveArchiveSettings();
 
-	//Schedule
+	// Schedule
 	void initTaskScheduler();
 	void searchExistingTask();
 	void removeTrigger(LONG index);
@@ -121,7 +112,7 @@ private:
 
 
 
-//// Manual Backup Dialog ////
+// Manual Backup Dialog
 class ManualBackupDialog : public ManualBackupDialogBase
 {
 public:
@@ -162,7 +153,7 @@ protected:
 
 
 
-//// Main Frame ////
+// Main Frame
 class MainFrame : public MainFrameBase
 {
 public:
@@ -189,4 +180,13 @@ protected:
 	std::unique_ptr<wxFileDialog> fileDialog_;
 	std::unique_ptr<ManualBackupDialog> manualBackupDialog_;
 	std::unique_ptr<SettingsFrame> settingsFrame_;
+};
+
+
+
+// Main Application
+class MainApp : public wxApp
+{
+public:
+	bool OnInit();
 };

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resource xmlns="http://www.wxwidgets.org/wxxrc">
   <object class="wxDialog" name="NewTriggerDialogBase">
-    <title>Add a new trigger</title>
+    <title>
+      <![CDATA[Add a new trigger]]>
+    </title>
     <centered>1</centered>
     <style>wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP</style>
     <hidden>1</hidden>
@@ -170,7 +172,9 @@
     </object>
   </object>
   <object class="wxFrame" name="SettingsFrameBase">
-    <title>Settings</title>
+    <title>
+      <![CDATA[Settings]]>
+    </title>
     <centered>1</centered>
     <style>wxCAPTION|wxMINIMIZE_BOX|wxCLOSE_BOX</style>
     <hidden>1</hidden>
@@ -572,11 +576,15 @@
                           <object class="wxListCtrl" name="triggerList">
                             <style>wxLC_SINGLE_SEL|wxLC_REPORT</style>
                             <object class="listcol">
-                              <text>Type</text>
+                              <text>
+                                <![CDATA[Type]]>
+                              </text>
                               <width>-1</width>
                             </object>
                             <object class="listcol">
-                              <text>Details</text>
+                              <text>
+                                <![CDATA[Details]]>
+                              </text>
                               <width>-1</width>
                             </object>
                           </object>
@@ -653,7 +661,9 @@
     </object>
   </object>
   <object class="wxDialog" name="ManualBackupDialogBase">
-    <title>Manual Backup</title>
+    <title>
+      <![CDATA[Manual Backup]]>
+    </title>
     <centered>1</centered>
     <style>wxDEFAULT_DIALOG_STYLE</style>
     <hidden>1</hidden>
@@ -1046,7 +1056,9 @@
     </object>
   </object>
   <object class="wxFrame" name="MainFrameBase">
-    <title>AutoBackupper</title>
+    <title>
+      <![CDATA[AutoBackupper]]>
+    </title>
     <centered>1</centered>
     <style>wxCAPTION|wxMINIMIZE_BOX|wxCLOSE_BOX</style>
     <size>640,360</size>
@@ -1066,15 +1078,21 @@
             <object class="wxListCtrl" name="mainList">
               <style>wxLC_REPORT</style>
               <object class="listcol">
-                <text>Name</text>
+                <text>
+                  <![CDATA[Name]]>
+                </text>
                 <width>-1</width>
               </object>
               <object class="listcol">
-                <text>Size</text>
+                <text>
+                  <![CDATA[Size]]>
+                </text>
                 <width>-1</width>
               </object>
               <object class="listcol">
-                <text>Path</text>
+                <text>
+                  <![CDATA[Path]]>
+                </text>
                 <width>-2</width>
               </object>
             </object>

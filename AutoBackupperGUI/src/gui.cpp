@@ -2,18 +2,7 @@
 
 
 
-//// Main App ////
-bool MainApp::OnInit()
-{
-	MainFrame* frame = new MainFrame(NULL);
-	frame->Show();
-
-	return true;
-}
-
-
-
-//// New Trigger Dialog ////
+// New Trigger Dialog
 NewTriggerDialog::NewTriggerDialog(wxWindow* parent,
 								   ITaskDefinition* taskDefinition) : NewTriggerDialogBase(parent), taskDefinition_(taskDefinition) {}
 NewTriggerDialog::~NewTriggerDialog() {}
@@ -257,7 +246,7 @@ void NewTriggerDialog::OnCancelButtonClicked(wxCommandEvent& event)
 
 
 
-//// Settings Frame ////
+// Settings Frame
 SettingsFrame::SettingsFrame(wxWindow* parent) : SettingsFrameBase(parent)
 {
 	#pragma region Archive
@@ -1136,7 +1125,7 @@ void SettingsFrame::saveScheduleSettings()
 
 
 
-//// Manual Backup Dialog ////
+// Manual Backup Dialog
 ManualBackupDialog::ManualBackupDialog(wxWindow* parent) : ManualBackupDialogBase(parent)
 {
 	fileHandler_ = std::make_unique<SettingsFileHandler>(SETTINGS_FILE);
@@ -1677,7 +1666,7 @@ void ManualBackupDialog::initArchiveSettings()
 
 
 
-//// Main Frame ////
+// Main Frame
 MainFrame::MainFrame(wxWindow* parent) : MainFrameBase(parent)
 {
 	directoryDialog_ = std::make_unique<wxDirDialog>(this, L"Choose directory", L"", wxDD_DEFAULT_STYLE);
@@ -1802,4 +1791,15 @@ void MainFrame::updateMainListColumnWidth()
 
 		mainList->SetColumnWidth(i, (std::max)(itemWidth, headerWidth));
 	}
+}
+
+
+
+// Main App
+bool MainApp::OnInit()
+{
+	MainFrame* mainFrame = new MainFrame(nullptr);
+	mainFrame->Show();
+
+	return true;
 }

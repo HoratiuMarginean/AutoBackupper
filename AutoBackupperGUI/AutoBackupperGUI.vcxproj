@@ -36,10 +36,6 @@
     <ClInclude Include="include\gui.h" />
     <ClInclude Include="wxCrafter\guibase.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="wxCrafter\AutoBackupper.xrc" />
-    <None Include="wxCrafter\bitmaps.xrc" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
